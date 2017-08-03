@@ -1,25 +1,27 @@
 {
-	"name":"axe-comments" ,
-	"version":"1.1.4" ,
-	"description":"Comments Module for Axe PHP Framework" ,
-	"main":"src/App.js" ,
-	"author":"Sammy Saglam" ,
-	"license":"MIT" ,
+	"name": "axe-comments",
+	"version": "1.1.4",
+	"description": "Comments Module for Axe PHP Framework",
+	"main": "src/App.js",
+	"author": "Sammy Saglam",
+	"license": "MIT",
 	"scripts": {
 		"build-watch": "webpack --progress --watch",
 		"build-dev": "webpack --progress",
 		"build": "webpack -p"
 	},
-	"dependencies":{
-		"react":"^15.6.1" ,
-		"uglifyjs-webpack-plugin":"^0.4.6"
-	} ,
-	"devDependencies":{
-		"babel-core":"^6.25.0" ,
-		"babel-loader":"^7.1.1" ,
-		"babel-plugin-transform-object-rest-spread":"^6.23.0" ,
-		"babel-preset-es2015":"^6.24.1" ,
-		"babel-preset-react":"^6.24.1" ,
-		"webpack":"^3.0.0"
+	"dependencies": {
+		"react": "^15.6.1",
+		"uglifyjs-webpack-plugin": "^0.4.6"
+	},
+	"devDependencies": {
+		"babel-core": "^6.25.0",
+		"babel-loader": "^7.1.1",
+		"babel-plugin-transform-object-rest-spread": "^6.23.0",
+		"babel-preset-es2015": "^6.24.1",
+		"babel-preset-react": "^6.24.1",
+		"eslint": "^4.3.0",
+		"eslint-plugin-react": "^7.1.0",
+		"webpack": "^3.0.0"
 	}
 }
