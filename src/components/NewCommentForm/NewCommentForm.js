@@ -6,24 +6,24 @@ export default class NewCommentForm extends React.Component {
 
 		this.state = {
 			commentorName:'' ,
-			text:         ''
+			text         :''
 		}
 
-		this.onNewCommentAdd            = this.onNewCommentAdd.bind(this);
+		this.onNewCommentAdd = this.onNewCommentAdd.bind(this);
 		this.onCommentorNameInputChange = this.onCommentorNameInputChange.bind(this);
-		this.onCommentInputChange       = this.onCommentInputChange.bind(this);
+		this.onCommentInputChange = this.onCommentInputChange.bind(this);
 	}
 
 	onCommentorNameInputChange(e) {
 		this.setState({
-			commentorName:     e.target.value ,
+			commentorName     :e.target.value ,
 			commentorNameError:!NewCommentForm._isCommentorNameValid(e.target.value)
 		});
 	}
 
 	onCommentInputChange(e) {
 		this.setState({
-			text:     e.target.value ,
+			text     :e.target.value ,
 			textError:!NewCommentForm._isCommentValid(e.target.value)
 		});
 	}
@@ -47,11 +47,11 @@ export default class NewCommentForm extends React.Component {
 		let errors = '';
 		if ( !this.props.loggedInUser && !NewCommentForm._isCommentorNameValid(this.state.commentorName) ) {
 			newState.commentorNameError = true;
-			newState.showErrors         = true;
+			newState.showErrors = true;
 			errors += "\n" + this.props.lang['comment-author-validation-error'];
 		}
 		if ( !NewCommentForm._isCommentValid(this.state.text) ) {
-			newState.textError  = true;
+			newState.textError = true;
 			newState.showErrors = true;
 			errors += "\n" + this.props.lang['comment-text-validation-error'];
 		}
@@ -67,8 +67,8 @@ export default class NewCommentForm extends React.Component {
 			// run ajax
 			if ( this.props.saveNewComment ) this.props.saveNewComment(newState.commentorName , newState.text , () => {
 				this.setState({
-					commentorName:   '' ,
-					text:            '' ,
+					commentorName   :'' ,
+					text            :'' ,
 					addingNewComment:false
 				});
 			});
