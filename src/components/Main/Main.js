@@ -37,25 +37,30 @@ export default class AxeComments extends React.Component {
 					null
 				}
 				{
-					this.props.comments === null ?
-						<div className="is-loading"/>
-						:
-						this.props.comments.length === 0 ?
-							<div className="no-comments-yet">{this.lang['no-comments-yet']}</div>
-							:
-							this.props.comments.map(comment =>
-								<Comment
-									key={comment.id}
-									customLabel={this.props.customLabel}
-									comment={comment}
-									allowReplyToComment={this.props.allowReplyToComment}
-									loggedInUser={this.props.loggedInUser}
-									deleteComment={this.props.deleteComment}
-									toggleLike={this.props.toggleLike}
-									toggleDislike={this.props.toggleDislike}
-									lang={this.lang}
-								/>
-							)
+					// loading
+					(this.props.comments === null && <div className="is-loading"/>)
+
+					||
+
+					// no comments
+					(this.props.comments.length === 0 && <div className="no-comments-yet">{this.lang['no-comments-yet']}</div>)
+
+					||
+
+					// comments
+					this.props.comments.map(comment =>
+						<Comment
+							key={comment.id}
+							customLabel={this.props.customLabel}
+							comment={comment}
+							allowReplyToComment={this.props.allowReplyToComment}
+							loggedInUser={this.props.loggedInUser}
+							deleteComment={this.props.deleteComment}
+							toggleLike={this.props.toggleLike}
+							toggleDislike={this.props.toggleDislike}
+							lang={this.lang}
+						/>
+					)
 				}
 			</div>
 		);

@@ -10,40 +10,58 @@ export default class Comment extends React.Component {
 		const userVote = parseInt(comment['current_user-vote']);
 
 		const dateGMT = (dateUTC => {
-			const t = dateUTC.split(/[- :]/);
-			return new Date(Date.UTC(t[0] , t[1] - 1 , t[2] , t[3] , t[4] , t[5]));
+			const dateParts = dateUTC.split(/[- :]/);
+
+			const YEAR = 0;
+			const MONTH = 1;
+			const DAY = 2;
+			const HOUR = 3;
+			const MINS = 4;
+			const SECS = 5;
+
+			return new Date(Date.UTC(dateParts[YEAR] , dateParts[MONTH] - 1 , dateParts[DAY] , dateParts[HOUR] , dateParts[MINS] , dateParts[SECS]));
+
 		})(comment.date);
-		
+
 		const timeSincePost = (date => {
 
-			var seconds = Math.floor((new Date() - date)/1000);
+			const MILISECONDS_IN_1_SECOND = 1000;
+			const secondsSincePost = Math.floor((new Date() - date) / MILISECONDS_IN_1_SECOND);
 
-			var interval = Math.floor(seconds/31536000);
+			const SECONDS_IN_1_YEAR = 31536000;
+			const SECONDS_IN_1_MONTH = 2592000;
+			const SECONDS_IN_1_DAY = 86400;
+			const SECONDS_IN_1_HOUR = 3600;
+			const SECONDS_IN_1_MIN = 60;
+
+			let interval = Math.floor(secondsSincePost / SECONDS_IN_1_YEAR);
 
 			if ( interval > 1 ) {
-				return interval + " " + this.props.lang['years-ago'];
+				return interval + ' ' + this.props.lang['years-ago'];
 			}
-			interval = Math.floor(seconds/2592000);
+			interval = Math.floor(secondsSincePost / SECONDS_IN_1_MONTH);
 			if ( interval > 1 ) {
-				return interval + " " + this.props.lang['months-ago'];
+				return interval + ' ' + this.props.lang['months-ago'];
 			}
-			interval = Math.floor(seconds/86400);
+			interval = Math.floor(secondsSincePost / SECONDS_IN_1_DAY);
 			if ( interval > 1 ) {
-				return interval + " " + this.props.lang['days-ago'];
+				return interval + ' ' + this.props.lang['days-ago'];
 			}
-			interval = Math.floor(seconds/3600);
+			interval = Math.floor(secondsSincePost / SECONDS_IN_1_HOUR);
 			if ( interval > 1 ) {
-				return interval + " " + this.props.lang['hours-ago'];
+				return interval + ' ' + this.props.lang['hours-ago'];
 			}
-			interval = Math.floor(seconds/60);
+			interval = Math.floor(secondsSincePost / SECONDS_IN_1_MIN);
 			if ( interval > 1 ) {
-				return interval + " " + this.props.lang['mins-ago'];
+				return interval + ' ' + this.props.lang['mins-ago'];
 			}
-			return Math.floor(seconds) + " " + this.props.lang['seconds-ago'];
+
+			return Math.floor(secondsSincePost) + ' ' + this.props.lang['seconds-ago'];
+
 		})(new Date(dateGMT));
 
 		return (
-			<div className={"comment" + (comment.stillLoading || comment.deleting ? " is-loading" : "")}>
+			<div className={'comment' + (comment.stillLoading || comment.deleting ? ' is-loading' : '')}>
 				{this.props.customLabel ?
 					this.props.customLabel(comment)
 					:
@@ -53,17 +71,17 @@ export default class Comment extends React.Component {
 				<span> - </span>
 				<span className="date">
 					{
-						!comment.date ?
-							this.props.lang['just-now']
+						comment.date ?
+							timeSincePost
 							:
-							(timeSincePost)
+							this.props.lang['just-now']
 					}
 				</span>
 				<div className="comment-contents">{comment.text}</div>
 				<div className="comment-actions vertical-align-children-middle">
-					{this.props.allowReplyToComment ? <span>Cevap Yaz</span> : null }
+					{this.props.allowReplyToComment ? <span>Cevap Yaz</span> : null}
 
-					<span className={comment.rating > 0 ? 'positive' : (comment.rating < 0 ? 'negative' : null)}>
+					<span className={(comment.rating > 0 && 'positive') || (comment.rating < 0 && 'negative') || 'neutral'}>
 						{comment.rating < 0 ? '-' : '+'}
 						{comment.rating}
 					</span>
