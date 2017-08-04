@@ -28,7 +28,7 @@ export default class AxeComments extends React.Component {
 
 	render() {
 		return (
-			<div className="comments">
+			<div className="axe-comments-root">
 				{this.props.showNewCommentForm ?
 					<NewCommentForm
 						saveNewComment={this.props.saveNewComment}
