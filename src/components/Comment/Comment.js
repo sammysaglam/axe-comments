@@ -9,7 +9,7 @@ export default class Comment extends React.Component {
 		const {comment} = this.props;
 		const userVote = parseInt(comment['current_user-vote']);
 
-		const dateGMT = (dateUTC => {
+		const dateGMT = !comment.date ? null : (dateUTC => {
 			const dateParts = dateUTC.split(/[- :]/);
 
 			const YEAR = 0;
@@ -23,7 +23,7 @@ export default class Comment extends React.Component {
 
 		})(comment.date);
 
-		const timeSincePost = (date => {
+		const timeSincePost = !dateGMT ? null : (date => {
 
 			const MILISECONDS_IN_1_SECOND = 1000;
 			const secondsSincePost = Math.floor((new Date() - date) / MILISECONDS_IN_1_SECOND);

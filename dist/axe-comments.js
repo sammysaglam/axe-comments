@@ -382,7 +382,7 @@ var Comment = function (_React$Component) {
 
 			var userVote = parseInt(comment['current_user-vote']);
 
-			var dateGMT = function (dateUTC) {
+			var dateGMT = !comment.date ? null : function (dateUTC) {
 				var dateParts = dateUTC.split(/[- :]/);
 
 				var YEAR = 0;
@@ -395,7 +395,7 @@ var Comment = function (_React$Component) {
 				return new Date(Date.UTC(dateParts[YEAR], dateParts[MONTH] - 1, dateParts[DAY], dateParts[HOUR], dateParts[MINS], dateParts[SECS]));
 			}(comment.date);
 
-			var timeSincePost = function (date) {
+			var timeSincePost = !dateGMT ? null : function (date) {
 
 				var MILISECONDS_IN_1_SECOND = 1000;
 				var secondsSincePost = Math.floor((new Date() - date) / MILISECONDS_IN_1_SECOND);
