@@ -86,7 +86,7 @@ export default class NewCommentForm extends React.Component {
 
 			// run ajax
 			if ( this.props.saveNewComment ) {
-				this.props.saveNewComment(newState.commentorName , newState.text , () => {
+				this.props.saveNewComment(this.state.commentorName , this.state.text , () => {
 					this.setState({
 						commentorName   :'' ,
 						text            :'' ,
