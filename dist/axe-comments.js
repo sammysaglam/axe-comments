@@ -149,11 +149,19 @@ var AxeComments = function (_React$Component) {
 					loggedInUser: this.props.loggedInUser,
 					lang: this.lang
 				}) : null,
-				this.props.comments === null ? _react2.default.createElement('div', { className: 'is-loading' }) : this.props.comments.length === 0 ? _react2.default.createElement(
+
+				// loading
+				this.props.comments === null && _react2.default.createElement('div', { className: 'is-loading' }) ||
+
+				// no comments
+				this.props.comments.length === 0 && _react2.default.createElement(
 					'div',
 					{ className: 'no-comments-yet' },
 					this.lang['no-comments-yet']
-				) : this.props.comments.map(function (comment) {
+				) ||
+
+				// comments
+				this.props.comments.map(function (comment) {
 					return _react2.default.createElement(_Comment2.default, {
 						key: comment.id,
 						customLabel: _this2.props.customLabel,
@@ -221,18 +229,18 @@ var NewCommentForm = function (_React$Component) {
 
 	_createClass(NewCommentForm, [{
 		key: 'onCommentorNameInputChange',
-		value: function onCommentorNameInputChange(e) {
+		value: function onCommentorNameInputChange(event) {
 			this.setState({
-				commentorName: e.target.value,
-				commentorNameError: !NewCommentForm._isCommentorNameValid(e.target.value)
+				commentorName: event.target.value,
+				commentorNameError: !NewCommentForm.isCommentorNameValid(event.target.value)
 			});
 		}
 	}, {
 		key: 'onCommentInputChange',
-		value: function onCommentInputChange(e) {
+		value: function onCommentInputChange(event) {
 			this.setState({
-				text: e.target.value,
-				textError: !NewCommentForm._isCommentValid(e.target.value)
+				text: event.target.value,
+				textError: !NewCommentForm.isCommentValid(event.target.value)
 			});
 		}
 	}, {
@@ -240,25 +248,25 @@ var NewCommentForm = function (_React$Component) {
 		value: function onNewCommentAdd() {
 			var _this2 = this;
 
-			var newState = this.state;
+			var newState = {};
 
 			// hide validation errors on submit click
 			newState.showErrors = false;
 
 			// data validation
 			var errors = '';
-			if (!this.props.loggedInUser && !NewCommentForm._isCommentorNameValid(this.state.commentorName)) {
+			if (!this.props.loggedInUser && !NewCommentForm.isCommentorNameValid(this.state.commentorName)) {
 				newState.commentorNameError = true;
 				newState.showErrors = true;
-				errors += "\n" + this.props.lang['comment-author-validation-error'];
+				errors += '\n' + this.props.lang['comment-author-validation-error'];
 			}
-			if (!NewCommentForm._isCommentValid(this.state.text)) {
+			if (!NewCommentForm.isCommentValid(this.state.text)) {
 				newState.textError = true;
 				newState.showErrors = true;
-				errors += "\n" + this.props.lang['comment-text-validation-error'];
+				errors += '\n' + this.props.lang['comment-text-validation-error'];
 			}
 			if (errors) {
-				errors = 'Hata!' + "\n" + '------' + errors;
+				errors = 'Hata! \n ------ ' + errors;
 				alert(errors);
 			} else {
 
@@ -266,13 +274,15 @@ var NewCommentForm = function (_React$Component) {
 				newState.addingNewComment = true;
 
 				// run ajax
-				if (this.props.saveNewComment) this.props.saveNewComment(newState.commentorName, newState.text, function () {
-					_this2.setState({
-						commentorName: '',
-						text: '',
-						addingNewComment: false
+				if (this.props.saveNewComment) {
+					this.props.saveNewComment(newState.commentorName, newState.text, function () {
+						_this2.setState({
+							commentorName: '',
+							text: '',
+							addingNewComment: false
+						});
 					});
-				});
+				}
 			}
 
 			this.setState(newState);
@@ -283,8 +293,20 @@ var NewCommentForm = function (_React$Component) {
 			return _react2.default.createElement(
 				'div',
 				{ className: 'add-comment horizontal-align-left' },
-				_react2.default.createElement('input', { disabled: this.state.addingNewComment || this.props.loggedInUser, value: this.props.loggedInUser ? this.props.loggedInUser.username : this.state.commentorName, className: this.state.showErrors ? this.state.commentorNameError ? 'invalid' : 'valid' : '', type: 'text', placeholder: this.props.lang['comment-author-placeholder'], onChange: this.onCommentorNameInputChange }),
-				_react2.default.createElement('textarea', { disabled: this.state.addingNewComment, value: this.state.text, className: this.state.showErrors ? this.state.textError ? 'invalid' : 'valid' : '', placeholder: this.props.lang['comment-placeholder'], onChange: this.onCommentInputChange }),
+				_react2.default.createElement('input', {
+					disabled: this.state.addingNewComment || this.props.loggedInUser,
+					value: this.props.loggedInUser ? this.props.loggedInUser.username : this.state.commentorName,
+					className: this.state.showErrors && (this.state.commentorNameError ? 'invalid' : 'valid') || '',
+					type: 'text', placeholder: this.props.lang['comment-author-placeholder'],
+					onChange: this.onCommentorNameInputChange
+				}),
+				_react2.default.createElement('textarea', {
+					disabled: this.state.addingNewComment,
+					value: this.state.text,
+					className: this.state.showErrors && (this.state.textError ? 'invalid' : 'valid') || '',
+					placeholder: this.props.lang['comment-placeholder'],
+					onChange: this.onCommentInputChange
+				}),
 				_react2.default.createElement(
 					'button',
 					{ disabled: this.state.addingNewComment, onClick: this.onNewCommentAdd },
@@ -293,14 +315,22 @@ var NewCommentForm = function (_React$Component) {
 			);
 		}
 	}], [{
-		key: '_isCommentorNameValid',
-		value: function _isCommentorNameValid(commentorName) {
-			return commentorName && commentorName.length >= 3 && commentorName.length <= 20;
+		key: 'isCommentorNameValid',
+		value: function isCommentorNameValid(commentorName) {
+
+			var MIN_COMMENTOR_NAME_LENGTH = 3;
+			var MAX_COMMENTOR_NAME_LENGTH = 20;
+
+			return commentorName && commentorName.length >= MIN_COMMENTOR_NAME_LENGTH && commentorName.length <= MAX_COMMENTOR_NAME_LENGTH;
 		}
 	}, {
-		key: '_isCommentValid',
-		value: function _isCommentValid(comment) {
-			return comment && comment.length >= 1 && comment.length <= 2000;
+		key: 'isCommentValid',
+		value: function isCommentValid(comment) {
+
+			var MIN_COMMENT_LENGTH = 1;
+			var MAX_COMMENT_LENGTH = 2000;
+
+			return comment && comment.length >= MIN_COMMENT_LENGTH && comment.length <= MAX_COMMENT_LENGTH;
 		}
 	}]);
 
@@ -353,41 +383,57 @@ var Comment = function (_React$Component) {
 			var userVote = parseInt(comment['current_user-vote']);
 
 			var dateGMT = function (dateUTC) {
-				var t = comment.date.split(/[- :]/);
-				return new Date(Date.UTC(t[0], t[1] - 1, t[2], t[3], t[4], t[5]));
+				var dateParts = dateUTC.split(/[- :]/);
+
+				var YEAR = 0;
+				var MONTH = 1;
+				var DAY = 2;
+				var HOUR = 3;
+				var MINS = 4;
+				var SECS = 5;
+
+				return new Date(Date.UTC(dateParts[YEAR], dateParts[MONTH] - 1, dateParts[DAY], dateParts[HOUR], dateParts[MINS], dateParts[SECS]));
 			}(comment.date);
 
 			var timeSincePost = function (date) {
 
-				var seconds = Math.floor((new Date() - date) / 1000);
+				var MILISECONDS_IN_1_SECOND = 1000;
+				var secondsSincePost = Math.floor((new Date() - date) / MILISECONDS_IN_1_SECOND);
 
-				var interval = Math.floor(seconds / 31536000);
+				var SECONDS_IN_1_YEAR = 31536000;
+				var SECONDS_IN_1_MONTH = 2592000;
+				var SECONDS_IN_1_DAY = 86400;
+				var SECONDS_IN_1_HOUR = 3600;
+				var SECONDS_IN_1_MIN = 60;
+
+				var interval = Math.floor(secondsSincePost / SECONDS_IN_1_YEAR);
 
 				if (interval > 1) {
-					return interval + " " + _this2.props.lang['years-ago'];
+					return interval + ' ' + _this2.props.lang['years-ago'];
 				}
-				interval = Math.floor(seconds / 2592000);
+				interval = Math.floor(secondsSincePost / SECONDS_IN_1_MONTH);
 				if (interval > 1) {
-					return interval + " " + _this2.props.lang['months-ago'];
+					return interval + ' ' + _this2.props.lang['months-ago'];
 				}
-				interval = Math.floor(seconds / 86400);
+				interval = Math.floor(secondsSincePost / SECONDS_IN_1_DAY);
 				if (interval > 1) {
-					return interval + " " + _this2.props.lang['days-ago'];
+					return interval + ' ' + _this2.props.lang['days-ago'];
 				}
-				interval = Math.floor(seconds / 3600);
+				interval = Math.floor(secondsSincePost / SECONDS_IN_1_HOUR);
 				if (interval > 1) {
-					return interval + " " + _this2.props.lang['hours-ago'];
+					return interval + ' ' + _this2.props.lang['hours-ago'];
 				}
-				interval = Math.floor(seconds / 60);
+				interval = Math.floor(secondsSincePost / SECONDS_IN_1_MIN);
 				if (interval > 1) {
-					return interval + " " + _this2.props.lang['mins-ago'];
+					return interval + ' ' + _this2.props.lang['mins-ago'];
 				}
-				return Math.floor(seconds) + " " + _this2.props.lang['seconds-ago'];
+
+				return Math.floor(secondsSincePost) + ' ' + _this2.props.lang['seconds-ago'];
 			}(new Date(dateGMT));
 
 			return _react2.default.createElement(
 				'div',
-				{ className: "comment" + (comment.stillLoading || comment.deleting ? " is-loading" : "") },
+				{ className: 'comment' + (comment.stillLoading || comment.deleting ? ' is-loading' : '') },
 				this.props.customLabel ? this.props.customLabel(comment) : null,
 				_react2.default.createElement(
 					'span',
@@ -402,7 +448,7 @@ var Comment = function (_React$Component) {
 				_react2.default.createElement(
 					'span',
 					{ className: 'date' },
-					!comment.date ? this.props.lang['just-now'] : timeSincePost
+					comment.date ? timeSincePost : this.props.lang['just-now']
 				),
 				_react2.default.createElement(
 					'div',
@@ -419,7 +465,7 @@ var Comment = function (_React$Component) {
 					) : null,
 					_react2.default.createElement(
 						'span',
-						{ className: comment.rating > 0 ? 'positive' : comment.rating < 0 ? 'negative' : null },
+						{ className: comment.rating > 0 && 'positive' || comment.rating < 0 && 'negative' || 'neutral' },
 						comment.rating < 0 ? '-' : '+',
 						comment.rating
 					),
