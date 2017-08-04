@@ -12,7 +12,8 @@ const LangDefaults = {
 	'comment-author-placeholder'     :'Your Name' ,
 	'comment-placeholder'            :'write a comment...' ,
 	'add-comment'                    :'Add Comment' ,
-	'delete'                         :'Delete'
+	'delete'                         :'Delete' ,
+	'error'                          :'Error'
 };
 
 export default class AxeComments extends React.Component {

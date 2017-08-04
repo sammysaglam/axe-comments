@@ -76,7 +76,7 @@ export default class NewCommentForm extends React.Component {
 			errors += '\n' + this.props.lang['comment-text-validation-error'];
 		}
 		if ( errors ) {
-			errors = 'Hata! \n ------ ' + errors;
+			errors = this.props.lang['error'] + '! \n------ ' + errors;
 			alert(errors);
 
 		} else {
