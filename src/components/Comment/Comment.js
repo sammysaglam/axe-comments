@@ -10,7 +10,7 @@ export default class Comment extends React.Component {
 		const userVote = parseInt(comment['current_user-vote']);
 
 		const dateGMT = (dateUTC => {
-			const t = comment.date.split(/[- :]/);
+			const t = dateUTC.split(/[- :]/);
 			return new Date(Date.UTC(t[0] , t[1] - 1 , t[2] , t[3] , t[4] , t[5]));
 		})(comment.date);
 		
