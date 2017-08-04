@@ -108,7 +108,7 @@ module.exports = {
         "lines-around-directive": "error",
         "max-depth": "error",
 	    "max-len": "off",
-        "max-lines": "error",
+	    "max-lines": "off",
         "max-nested-callbacks": "error",
         "max-params": "error",
 	    "max-statements": ["error",{
@@ -173,7 +173,7 @@ module.exports = {
         "no-octal-escape": "error",
         "no-param-reassign": "error",
         "no-path-concat": "error",
-        "no-plusplus": "error",
+        "no-plusplus": "off",
         "no-process-env": "error",
         "no-process-exit": "error",
         "no-proto": "error",
