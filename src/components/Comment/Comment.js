@@ -67,7 +67,7 @@ export default class Comment extends React.Component {
 					:
 					null
 				}
-				<span className="username">{comment.author && comment.author[0] ? comment.author[0].username : comment.guest_author_name}</span>
+				<span className="username">{comment.author && comment.author ? comment.author.username : comment.guest_author_name}</span>
 				<span> - </span>
 				<span className="date">
 					{
