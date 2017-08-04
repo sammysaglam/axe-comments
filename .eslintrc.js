@@ -62,7 +62,7 @@ module.exports = {
         "curly": "error",
         "default-case": "error",
         "dot-location": "error",
-        "dot-notation": "error",
+	    "dot-notation": "off",
         "eol-last": [
             "error",
             "never"
@@ -111,18 +111,17 @@ module.exports = {
         "max-lines": "error",
         "max-nested-callbacks": "error",
         "max-params": "error",
-        "max-statements": "error",
+	    "max-statements": ["error",{
+		    max:30
+	    }],
         "max-statements-per-line": "error",
-        "multiline-ternary": "error",
+        "multiline-ternary": "off",
         "new-cap": "error",
         "new-parens": "error",
-        "newline-after-var": [
-            "error",
-            "always"
-        ],
+	    "newline-after-var": "off",
         "newline-before-return": "error",
         "newline-per-chained-call": "off",
-        "no-alert": "error",
+        "no-alert": "off",
         "no-array-constructor": "error",
         "no-await-in-loop": "error",
         "no-bitwise": "error",
@@ -153,7 +152,9 @@ module.exports = {
         "no-lone-blocks": "error",
         "no-lonely-if": "error",
         "no-loop-func": "error",
-        "no-magic-numbers": "error",
+	    "no-magic-numbers": ["error",{
+		    ignore:[1,0,-1]
+	    }],
         "no-mixed-operators": "error",
         "no-mixed-requires": "error",
         "no-multi-assign": "error",
@@ -193,7 +194,7 @@ module.exports = {
         "no-sync": "error",
         "no-tabs": "off",
         "no-template-curly-in-string": "error",
-        "no-ternary": "error",
+        "no-ternary": "off",
         "no-throw-literal": "error",
         "no-trailing-spaces": "error",
         "no-undef-init": "error",
@@ -236,11 +237,15 @@ module.exports = {
         "prefer-reflect": "error",
         "prefer-rest-params": "error",
         "prefer-spread": "error",
-        "prefer-template": "error",
+	    "prefer-template": "off",
         "quote-props": "off",
         "quotes": [
-            "error",
-            "single"
+	        "error",
+	        "single" ,
+	        {
+		        "avoidEscape":true ,
+		        "allowTemplateLiterals": true
+	        }
         ],
         "radix": "off",
 	    "react/jsx-uses-react": "error",
@@ -259,10 +264,7 @@ module.exports = {
         "sort-vars": "error",
         "space-before-blocks": "error",
         "space-before-function-paren": "off",
-        "space-in-parens": [
-            "error",
-            "never"
-        ],
+	    "space-in-parens": "off",
         "space-infix-ops": "error",
         "space-unary-ops": "error",
         "spaced-comment": [
