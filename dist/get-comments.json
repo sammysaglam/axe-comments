@@ -1,0 +1,149 @@
+[
+	{
+		"id":"155" ,
+		"customLabel":"Axe" ,
+		"date":"2017-08-04 10:50:25" ,
+		"author_uid":"1" ,
+		"guest_author_name":null ,
+		"text":"Wow Incredible!" ,
+		"rating":"-1" ,
+		"current_user-vote":"0" ,
+		"author":{
+			"id":"1" ,
+			"username":"sammysaglam"
+		}
+	} ,
+	{
+		"id":"154" ,
+		"customLabel":"Axe.cc" ,
+		"date":"2017-07-12 14:33:20" ,
+		"author_uid":null ,
+		"guest_author_name":"Sami" ,
+		"text":"Sed facilisis cursus nulla." ,
+		"rating":"-1" ,
+		"current_user-vote":"0" ,
+		"author":null
+	} ,
+	{
+		"id":"151" ,
+		"customLabel":"ACSEL" ,
+		"date":"2017-07-11 13:13:37" ,
+		"author_uid":null ,
+		"guest_author_name":"sammy saglam" ,
+		"text":"Why not" ,
+		"rating":"1" ,
+		"current_user-vote":"0" ,
+		"author":null
+	} ,
+	{
+		"id":"149" ,
+		"customLabel":"USD" ,
+		"date":"2017-07-07 14:06:09" ,
+		"author_uid":"1" ,
+		"guest_author_name":null ,
+		"text":"Pellentesque volutpat, ex sed porttitor condimentum, diam dui aliquam leo, imperdiet lacinia orci felis id massa." ,
+		"rating":"1" ,
+		"current_user-vote":"0" ,
+		"author":{
+			"id":"1" ,
+			"username":"sammysaglam"
+		}
+	} ,
+	{
+		"id":"148" ,
+		"customLabel":"Best" ,
+		"date":"2017-07-06 17:53:30" ,
+		"author_uid":null ,
+		"guest_author_name":"deneme" ,
+		"text":"Sed facilisis cursus nulla, eget mollis ipsum viverra sit amet." ,
+		"rating":"-1" ,
+		"current_user-vote":"0" ,
+		"author":null
+	} ,
+	{
+		"id":"147" ,
+		"customLabel":"Cool" ,
+		"date":"2017-07-06 17:09:51" ,
+		"author_uid":null ,
+		"guest_author_name":"gdfg" ,
+		"text":"Pellentesque volutpat, ex sed porttitor condimentum, diam dui aliquam leo, imperdiet lacinia orci felis id massa." ,
+		"rating":"1" ,
+		"current_user-vote":"0" ,
+		"author":null
+	} ,
+	{
+		"id":"146" ,
+		"customLabel":"Wow" ,
+		"date":"2017-07-06 15:03:00" ,
+		"author_uid":null ,
+		"guest_author_name":"hgffgh" ,
+		"text":"In hac habitasse platea dictumst." ,
+		"rating":"0" ,
+		"current_user-vote":"0" ,
+		"author":null
+	} ,
+	{
+		"id":"143" ,
+		"customLabel":"Axe" ,
+		"date":"2017-07-05 15:03:22" ,
+		"author_uid":null ,
+		"guest_author_name":"jghj" ,
+		"text":"Morbi porta, ligula eget facilisis tempus, quam orci lobortis nisl, ac fringilla orci diam at sapien. Aliquam erat volutpat." ,
+		"rating":"0" ,
+		"current_user-vote":"0" ,
+		"author":null
+	} ,
+	{
+		"id":"142" ,
+		"customLabel":"Axe.cc" ,
+		"date":"2017-07-05 13:52:53" ,
+		"author_uid":"1" ,
+		"guest_author_name":null ,
+		"text":"Aenean sodales lectus ac ipsum posuere tempor. Mauris eu fringilla tortor." ,
+		"rating":"0" ,
+		"current_user-vote":"0" ,
+		"author":{
+			"id":"1" ,
+			"username":"sammysaglam"
+		}
+	} ,
+	{
+		"id":"141" ,
+		"customLabel":"USD" ,
+		"date":"2017-07-05 13:52:50" ,
+		"author_uid":"1" ,
+		"guest_author_name":null ,
+		"text":"Praesent sed metus eu turpis congue bibendum. Duis quis tempor tellus." ,
+		"rating":"1" ,
+		"current_user-vote":"0" ,
+		"author":{
+			"id":"1" ,
+			"username":"sammysaglam"
+		}
+	} ,
+	{
+		"id":"140" ,
+		"customLabel":"EUR" ,
+		"date":"2017-07-05 13:52:47" ,
+		"author_uid":"1" ,
+		"guest_author_name":null ,
+		"text":"Integer posuere diam nec malesuada tincidunt. Vivamus est neque, sodales id consectetur nec, volutpat sed mi." ,
+		"rating":"0" ,
+		"current_user-vote":"0" ,
+		"author":{
+			"id":"1" ,
+			"username":"sammysaglam"
+		}
+	} ,
+	{
+		"id":"100" ,
+		"customLabel":"Best" ,
+		"date":"2017-06-29 14:33:39" ,
+		"author_uid":null ,
+		"guest_author_name":"omer" ,
+		"text":"Vivamus aliquet eget massa sit amet varius. Sed facilisis cursus nulla, eget mollis ipsum viverra sit amet. Aenean id dolor vulputate magna tincidunt euismod. Pellentesque sit amet vehicula magna. Sed mi dolor, semper id blandit et, molestie ut urna. Nam lacinia arcu tincidunt sapien lobortis vestibulum." ,
+		"rating":"-1" ,
+		"current_user-vote":"0" ,
+		"author":null
+	}
+]
