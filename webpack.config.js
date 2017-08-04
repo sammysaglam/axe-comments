@@ -27,6 +27,7 @@ module.exports = {
 	} ,
 	externals:{
 		'react':'react' ,
+		'prop-types':'PropTypes'
 	} ,
 	module   :{
 		rules:[

@@ -1,6 +1,7 @@
 import React from 'react';
 import NewCommentForm from '../NewCommentForm/NewCommentForm';
 import Comment from '../Comment/Comment';
+import PropTypes from 'prop-types';
 
 const LangDefaults = {
 	'no-comments-yet'                :'No comments yet...' ,
@@ -65,4 +66,40 @@ export default class AxeComments extends React.Component {
 			</div>
 		);
 	}
+}
+
+AxeComments.propTypes = {
+	allowReplyToComment:PropTypes.bool ,
+	comments           :React.PropTypes.arrayOf(PropTypes.shape({
+		author_uid         :PropTypes.oneOfType([
+			PropTypes.number ,
+			PropTypes.string
+		]) ,
+		'current_user-vote':PropTypes.oneOfType([
+			PropTypes.number ,
+			PropTypes.string
+		]) ,
+		date               :PropTypes.string.isRequired ,
+		guest_author_name  :PropTypes.string ,
+		id                 :PropTypes.oneOfType([
+			PropTypes.number ,
+			PropTypes.string
+		]).isRequired ,
+		rating             :PropTypes.oneOfType([
+			PropTypes.number ,
+			PropTypes.string
+		]) ,
+		text               :PropTypes.string.isRequired ,
+	})) ,
+	customLabel        :PropTypes.func ,
+	deleteComment      :PropTypes.func.isRequired ,
+	lang               :PropTypes.shape({}) ,
+	loggedInUser       :PropTypes.oneOf([
+		false ,
+		PropTypes.object
+	]) ,
+	saveNewComment     :PropTypes.func ,
+	showNewCommentForm :PropTypes.bool ,
+	toggleDislike      :PropTypes.func.isRequired ,
+	toggleLike         :PropTypes.func.isRequired
 }
