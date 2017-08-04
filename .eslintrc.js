@@ -242,7 +242,7 @@ module.exports = {
             "error",
             "single"
         ],
-        "radix": "error",
+        "radix": "off",
 	    "react/jsx-uses-react": "error",
 	    "react/jsx-uses-vars": "error",
         "require-await": "error",
