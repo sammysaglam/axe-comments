@@ -94,9 +94,9 @@ AxeComments.propTypes = {
 	customLabel        :PropTypes.func ,
 	deleteComment      :PropTypes.func.isRequired ,
 	lang               :PropTypes.shape({}) ,
-	loggedInUser       :PropTypes.oneOf([
-		false ,
-		PropTypes.object
+	loggedInUser       :PropTypes.oneOfType([
+		PropTypes.object ,
+		PropTypes.oneOf([false])
 	]) ,
 	saveNewComment     :PropTypes.func ,
 	showNewCommentForm :PropTypes.bool ,
