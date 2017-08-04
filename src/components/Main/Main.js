@@ -72,7 +72,7 @@ export default class AxeComments extends React.Component {
 AxeComments.propTypes = {
 	allowReplyToComment:PropTypes.bool ,
 	comments           :React.PropTypes.arrayOf(PropTypes.shape({
-		author_uid         :PropTypes.oneOfType([
+		'author_uid'       :PropTypes.oneOfType([
 			PropTypes.number ,
 			PropTypes.string
 		]) ,
@@ -80,21 +80,32 @@ AxeComments.propTypes = {
 			PropTypes.number ,
 			PropTypes.string
 		]) ,
-		date               :PropTypes.string.isRequired ,
-		guest_author_name  :PropTypes.string ,
-		id                 :PropTypes.oneOfType([
+		'date'             :PropTypes.string.isRequired ,
+		'guest_author_name':PropTypes.string ,
+		'id'               :PropTypes.oneOfType([
 			PropTypes.number ,
 			PropTypes.string
 		]).isRequired ,
-		rating             :PropTypes.oneOfType([
+		'rating'           :PropTypes.oneOfType([
 			PropTypes.number ,
 			PropTypes.string
 		]) ,
-		text               :PropTypes.string.isRequired ,
+		'text'             :PropTypes.string.isRequired
 	})) ,
 	customLabel        :PropTypes.func ,
 	deleteComment      :PropTypes.func.isRequired ,
-	lang               :PropTypes.shape({}) ,
+	lang               :PropTypes.shape({
+		'no-comments-yet'                :PropTypes.string ,
+		'just-now'                       :PropTypes.string ,
+		'mins-ago'                       :PropTypes.string ,
+		'comment-author-validation-error':PropTypes.string ,
+		'comment-text-validation-error'  :PropTypes.string ,
+		'comment-author-placeholder'     :PropTypes.string ,
+		'comment-placeholder'            :PropTypes.string ,
+		'add-comment'                    :PropTypes.string ,
+		'delete'                         :PropTypes.string ,
+		'error'                          :PropTypes.string
+	}) ,
 	loggedInUser       :PropTypes.oneOfType([
 		PropTypes.object ,
 		PropTypes.oneOf([false])
