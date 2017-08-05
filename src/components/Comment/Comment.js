@@ -92,8 +92,23 @@ export default class Comment extends React.Component {
 						null
 					}
 
-					<span onClick={() => this.props.toggleLike(comment.id)} className={userVote === 1 ? 'like liked' : 'like'}></span>
-					<span onClick={() => this.props.toggleDislike(comment.id)} className={userVote === -1 ? 'dislike disliked' : 'dislike'}></span>
+					<span onClick={() => this.props.toggleLike(comment.id)} className={userVote === 1 ? 'like liked' : 'like'}>
+						{
+							userVote === 1 ?
+								<img src={require('./img/liked.png')}/>
+								:
+								<img src={require('./img/like.png')}/>
+						}
+
+					</span>
+					<span onClick={() => this.props.toggleDislike(comment.id)} className={userVote === -1 ? 'dislike disliked' : 'dislike'}>
+						{
+							userVote === -1 ?
+								<img src={require('./img/disliked.png')}/>
+								:
+								<img src={require('./img/dislike.png')}/>
+						}
+					</span>
 				</div>
 			</div>
 		)

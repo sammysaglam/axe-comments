@@ -30,6 +30,7 @@ const baseConfig = {
 	} ,
 	module   :{
 		rules:[
+			{test:/\.(jpg|png|svg)$/ , loader:'url-loader'} ,
 			{test:/\.(js|jsx)$/ , loader:'babel-loader' , exclude:/node_modules/} ,
 			...(themes.map((themeName , index) => ({test:new RegExp(themeName + "\.scss$") , loader:themeExtractors[index].extract(['css-loader' , 'sass-loader'])}))) ,
 		]
