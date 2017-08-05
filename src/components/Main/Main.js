@@ -108,7 +108,13 @@ AxeComments.propTypes = {
 		'error'                          :PropTypes.string
 	}) ,
 	loggedInUser       :PropTypes.oneOfType([
-		PropTypes.object ,
+		PropTypes.shape({
+			'id'      :PropTypes.oneOfType([
+				PropTypes.number ,
+				PropTypes.string
+			]).isRequired ,
+			'username':PropTypes.string.isRequired
+		}) ,
 		PropTypes.oneOf([false])
 	]) ,
 	saveNewComment     :PropTypes.func ,
