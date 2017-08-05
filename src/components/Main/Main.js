@@ -90,6 +90,7 @@ AxeComments.propTypes = {
 			PropTypes.number ,
 			PropTypes.string
 		]) ,
+		'stillLoading'     :PropTypes.bool ,
 		'text'             :PropTypes.string.isRequired
 	})) ,
 	customLabel        :PropTypes.func ,
