@@ -82,7 +82,7 @@ export default class Comment extends React.Component {
 					{this.props.allowReplyToComment ? <span>Cevap Yaz</span> : null}
 
 					<span className={(comment.rating > 0 && 'positive') || (comment.rating < 0 && 'negative') || 'neutral'}>
-						{comment.rating < 0 ? '-' : '+'}
+						{comment.rating < 0 ? '' : '+'}
 						{comment.rating}
 					</span>
 
