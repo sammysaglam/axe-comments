@@ -92,7 +92,7 @@ export default class Comment extends React.Component {
 						null
 					}
 
-					<span onClick={() => this.props.toggleLike(comment.id)} className={userVote === 1 ? 'like liked' : 'like'}>
+					<span onClick={() => this.props.toggleLike(comment)} className={userVote === 1 ? 'like liked' : 'like'}>
 						{
 							userVote === 1 ?
 								<img src={require('./img/liked.png')}/>
@@ -101,7 +101,7 @@ export default class Comment extends React.Component {
 						}
 
 					</span>
-					<span onClick={() => this.props.toggleDislike(comment.id)} className={userVote === -1 ? 'dislike disliked' : 'dislike'}>
+					<span onClick={() => this.props.toggleDislike(comment)} className={userVote === -1 ? 'dislike disliked' : 'dislike'}>
 						{
 							userVote === -1 ?
 								<img src={require('./img/disliked.png')}/>
