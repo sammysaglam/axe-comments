@@ -68,17 +68,39 @@ var AxeComments =
 /* 0 */
 /***/ (function(module, exports) {
 
-module.exports = react;
+module.exports = React;
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(2);
+__webpack_require__(2);
+module.exports = __webpack_require__(3);
 
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _Main = __webpack_require__(4);
+
+var _Main2 = _interopRequireDefault(_Main);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = _Main2.default;
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -96,13 +118,17 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _NewCommentForm = __webpack_require__(3);
+var _NewCommentForm = __webpack_require__(5);
 
 var _NewCommentForm2 = _interopRequireDefault(_NewCommentForm);
 
-var _Comment = __webpack_require__(4);
+var _Comment = __webpack_require__(6);
 
 var _Comment2 = _interopRequireDefault(_Comment);
+
+var _propTypes = __webpack_require__(11);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -114,14 +140,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var LangDefaults = {
 	'no-comments-yet': 'No comments yet...',
-	'just-now': 'just now...',
-	'mins-ago': 'minutes ago',
 	'comment-author-validation-error': 'Your name must be min 3, max 20 characters',
 	'comment-text-validation-error': 'Your comment cannot be empty, and cannot exceed 2000 characters',
 	'comment-author-placeholder': 'Your Name',
 	'comment-placeholder': 'write a comment...',
 	'add-comment': 'Add Comment',
-	'delete': 'Delete'
+	'delete': 'Delete',
+	'error': 'Error',
+	'just-now': 'just now...',
+	'years-ago': 'years ago',
+	'months-ago': 'months ago',
+	'days-ago': 'days ago',
+	'hours-ago': 'hours ago',
+	'mins-ago': 'minutes ago'
 };
 
 var AxeComments = function (_React$Component) {
@@ -143,9 +174,9 @@ var AxeComments = function (_React$Component) {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: 'comments' },
+				{ className: 'axe-comments-root' },
 				this.props.showNewCommentForm ? _react2.default.createElement(_NewCommentForm2.default, {
-					saveNewComment: this.props.saveNewComment,
+					createNewComment: this.props.createNewComment,
 					loggedInUser: this.props.loggedInUser,
 					lang: this.lang
 				}) : null,
@@ -183,8 +214,49 @@ var AxeComments = function (_React$Component) {
 
 exports.default = AxeComments;
 
+
+AxeComments.propTypes = {
+	allowReplyToComment: _propTypes2.default.bool,
+	comments: _react2.default.PropTypes.arrayOf(_propTypes2.default.shape({
+		'author_uid': _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string]),
+		'current_user-vote': _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string]),
+		'date': _propTypes2.default.string.isRequired,
+		'guest_author_name': _propTypes2.default.string,
+		'id': _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string]).isRequired,
+		'rating': _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string]),
+		'stillLoading': _propTypes2.default.bool,
+		'text': _propTypes2.default.string.isRequired
+	})),
+	customLabel: _propTypes2.default.func,
+	deleteComment: _propTypes2.default.func.isRequired,
+	lang: _propTypes2.default.shape({
+		'no-comments-yet': _propTypes2.default.string,
+		'comment-author-validation-error': _propTypes2.default.string,
+		'comment-text-validation-error': _propTypes2.default.string,
+		'comment-author-placeholder': _propTypes2.default.string,
+		'comment-placeholder': _propTypes2.default.string,
+		'add-comment': _propTypes2.default.string,
+		'delete': _propTypes2.default.string,
+		'error': _propTypes2.default.string,
+		'just-now': _propTypes2.default.string,
+		'years-ago': _propTypes2.default.string,
+		'months-ago': _propTypes2.default.string,
+		'days-ago': _propTypes2.default.string,
+		'hours-ago': _propTypes2.default.string,
+		'mins-ago': _propTypes2.default.string
+	}),
+	loggedInUser: _propTypes2.default.oneOfType([_propTypes2.default.shape({
+		'id': _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string]).isRequired,
+		'username': _propTypes2.default.string.isRequired
+	}), _propTypes2.default.oneOf([false])]),
+	createNewComment: _propTypes2.default.func,
+	showNewCommentForm: _propTypes2.default.bool,
+	toggleDislike: _propTypes2.default.func.isRequired,
+	toggleLike: _propTypes2.default.func.isRequired
+};
+
 /***/ }),
-/* 3 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -266,7 +338,7 @@ var NewCommentForm = function (_React$Component) {
 				errors += '\n' + this.props.lang['comment-text-validation-error'];
 			}
 			if (errors) {
-				errors = 'Hata! \n ------ ' + errors;
+				errors = this.props.lang['error'] + '! \n------ ' + errors;
 				alert(errors);
 			} else {
 
@@ -274,8 +346,8 @@ var NewCommentForm = function (_React$Component) {
 				newState.addingNewComment = true;
 
 				// run ajax
-				if (this.props.saveNewComment) {
-					this.props.saveNewComment(newState.commentorName, newState.text, function () {
+				if (this.props.createNewComment) {
+					this.props.createNewComment(this.state.commentorName, this.state.text, function () {
 						_this2.setState({
 							commentorName: '',
 							text: '',
@@ -340,7 +412,7 @@ var NewCommentForm = function (_React$Component) {
 exports.default = NewCommentForm;
 
 /***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -438,7 +510,7 @@ var Comment = function (_React$Component) {
 				_react2.default.createElement(
 					'span',
 					{ className: 'username' },
-					comment.author && comment.author[0] ? comment.author[0].username : comment.guest_author_name
+					comment.author && comment.author ? comment.author.username : comment.guest_author_name
 				),
 				_react2.default.createElement(
 					'span',
@@ -466,22 +538,30 @@ var Comment = function (_React$Component) {
 					_react2.default.createElement(
 						'span',
 						{ className: comment.rating > 0 && 'positive' || comment.rating < 0 && 'negative' || 'neutral' },
-						comment.rating < 0 ? '-' : '+',
+						comment.rating < 0 ? '' : '+',
 						comment.rating
 					),
-					this.props.loggedInUser && comment.author_uid === this.props.loggedInUser.id ? _react2.default.createElement(
+					this.props.loggedInUser && comment.author_uid && comment.author_uid.toString() === this.props.loggedInUser.id.toString() ? _react2.default.createElement(
 						'span',
 						{ className: 'delete', onClick: function onClick() {
-								return _this2.props.deleteComment(comment.id);
+								return _this2.props.deleteComment(comment);
 							} },
 						this.props.lang['delete']
 					) : null,
-					_react2.default.createElement('span', { onClick: function onClick() {
-							return _this2.props.toggleLike(comment.id);
-						}, className: userVote === 1 ? 'like liked' : 'like' }),
-					_react2.default.createElement('span', { onClick: function onClick() {
-							return _this2.props.toggleDislike(comment.id);
-						}, className: userVote === -1 ? 'dislike disliked' : 'dislike' })
+					_react2.default.createElement(
+						'span',
+						{ onClick: function onClick() {
+								return _this2.props.toggleLike(comment);
+							}, className: userVote === 1 ? 'like liked' : 'like' },
+						userVote === 1 ? _react2.default.createElement('img', { src: __webpack_require__(7) }) : _react2.default.createElement('img', { src: __webpack_require__(8) })
+					),
+					_react2.default.createElement(
+						'span',
+						{ onClick: function onClick() {
+								return _this2.props.toggleDislike(comment);
+							}, className: userVote === -1 ? 'dislike disliked' : 'dislike' },
+						userVote === -1 ? _react2.default.createElement('img', { src: __webpack_require__(9) }) : _react2.default.createElement('img', { src: __webpack_require__(10) })
+					)
 				)
 			);
 		}
@@ -491,6 +571,36 @@ var Comment = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Comment;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+IEmuOgAAAARnQU1BAACxjwv8YQUAAAABc1JHQgCuzhzpAAABfVBMVEUAAAArzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzicrzif5VvIJAAAAfnRSTlMAJuv8/f76qKxYJTymqvkDovs/3KABpegLFgjsb1GnxLJxKPhDGRzBIdmej0Cuxs1aMBcRNgRoIwKF6ucsw/Diqz2HviJjHTjzEEpXK7kTMzKV9vcOUoO7vC6YbA0pjosVteZny4K4OpTfcH15H9GBZcCZXdAa4ddkiDmboZPg4nkjAAAB/klEQVR42u3Z6U8TURjF4bfttIOlFMq+r2UTURAVWV1QUFZlR8CFRUDckB3l/O3GhCiNCdA7N3NC8v6+TpPzZJImM3dENE3TNE3TvLWKPzl5T19y9jMjOGvrGWO/oQh/28v2f790Deeq8B+Qc34fp77vf0rZR6Xf+8lQKsD1eb+pDFRA8VdwAVngAj6DCxh2uIBAP6iA6UNQAQXV4ALWwQXMhLmA3hegAjryQAVkj4ELeAcuoA1cwKtJLuD9AaiA+43gAjbBBTwHFzAU5wLqV0AFPNwBF/AAXEBxNxmwCE85ZVWzAU+AO/BcuHLfwzkAbBTMNQbcsALAlLGgyw4AwfoLz3syUqv5dynfEgCxdO6ze9GbqOnfIWoGyLAFwDc2oI8NCLIBDhsABShAAWxAHRvwmgyID5IBb4QLiHwhA34KF5BoIgNuChcQ6iQDcoQLCAXIgELhApxaMsAVLiA8SgY8Fi4gvEAGtAoZ0E4GVAsZMEEGfBAy4B4Z8FHIgBMyYE7IgEwyYEDIgFtkQKNYAMQ8AJI2AG/N96vEBmDXHPDECqAkYbqfL1YAxsflzUuWALVxo/2iqFgCSI3J/qNlsQaQlvT35++KRYCU16U333NUIFYBEo1Frv4Ufvt7adqfxjbc1Mr/+8X4yPEv99IKf2xXlIimaZqmaZqmXZt+AyglUprg+5FgAAAAAElFTkSuQmCC"
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAABFVJREFUeJzt3U+IVWUcxvGvo9SUkeWfhTUEFkULCxSCiMEos4XUIkWKaBfVwj/ULjeK9ncTGUErQ6bClMqMIBQUpTLBiCSKxIoQXUzqTjeNc2dcvAwICXnnfc/5/X7veT5wdnfe97n3POfOO2fuPQdERERERERERERERERERERE6vISMHmVrQf8CbwF3GKWTho1DIxx9QJcuf0N3GmUURoyBIzy/zt/ajsOzDRJKsUNAj9y7Tt/anvKIqyU9xH97/xJ4H2LsFLWy0xv508CnxrklYKWA+NMvwC72o/cvAHrAC1ZBOxGC7n/6EIBZgN7gXnWQTzqQgF2APdbh/Cq9gJsBNZYhxAbK0mndKe76NMiMLB7gJ3U+/yKqfEFuhn4CphjHSSC2gowA/gEuNc6SBS1FWAL8KR1CLGxCpig3KJPi8BAFgMjpF8B0ocaCnAr6UzfTdZBIopegJmkt+a7rINEFb0AbwOPW4cQG8/S3IJPi0DnlgLbrUPUIGIBFgBfAjdYB6lBtALMAj4H7rAOUotoBdgGLLMOUZNIBXgeWGsdojZRCvAg8IF1iBpFKMBCYA9wnXWQGnkvwADp8/gLrYPUynsBXgQetg5RM88FmA1stQ4hdtbR7qleT1sPOA98D7xG+oxj5/yE/Y7wsk2Q1kK3Zb2igQxh/6J73M5ReE3kdQ0wbB3AqfnAPgqWwGsB7rMO4Ngg6f8hRf40ntXHY4dJ36+friPAu9f42Nsz5umC+cA7pM9EZOmnAEPA6oy5xvt47I0Z83TF08Bm4I+cQbz+CvCay5MB4LkSg0hcj+YOoALElv0VOBUgtrm5A6gAsWXvPxWg41SAjlMBOk4F6DgVoONUgI5TAWL7N3cAFSC2D3MHUAHiGiNdHyGLChDXDuB07iAqQEyXSHc0y6YCxDQCnCoxkAoQzzjwZqnBVIB4Pibdy7AIFSCWHvBGyQFVgFh2An+VHFAFiKMHvF56UBUgjt3AydKDqgAxTJC+JVycChDDZ8CJJgZWAfybpKGjH1SACL4AfmtqcBXAt0aPflABvNsL/NLkBCqAb41fJEsF8Otr4HjTk6gAfm1pYxIVwKdvSFdJa5wK4FMrRz+oAB7tB461NZkK4E9rRz+oAN4cAI62OaEK4EurRz+oAJ4cIl0culUqgB8ml8ZXAXz4FjhsMbHXAoxZB2iZ2Y0xvBZg1DpAi44AB60m91qAn60DtGij5eReC7Cf/i4uHdUI8J1lAK8FOEu6QXTNTgLrrUN4LQDAJupdDP4DPAFcsA7iuQAngFetQzTgNPAImdf5L8VzASDdYWSbdYiCDgIPAL9bB5nivQAAr5BuVZN9RSxDo8ALwArS239Iz5B3y7NdmfPfTfp27Fhmjra2CeAH0o4fzHzujZnRx2MfAjZkzHUUeC/j56fMAx4DlpDunHV9gTFL6AEXgTPAr6QTPGdNE4mIiIiIiIiIiIiIiIiIiIiIiIiISDdcBgE8CpVwQrG/AAAAAElFTkSuQmCC"
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+IEmuOgAAAARnQU1BAACxjwv8YQUAAAABc1JHQgCuzhzpAAABfVBMVEUAAAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAClZqjvAAAAfnRSTlMA6/wm/f6mqKxYJfqqPPkL6Bnc+D9xHCjBb6KyIQGnA8QIoPtR7KUWQ4sX4TDZK54RFbuZ6psCuMYTg9d9MqGUvPZ5OZgOk3ANj9Gujs2rGhBdZQTmI9CFy+c6w9/iwD2CvmOBaDjwH7VXHbmIM0CVNvcsUiJnh/NKWi5sKWQzet0jAAAB8UlEQVR42u3ZVU9DURCF0aEKNdwdWtzd3d3d3d1lfjsPhEBLAu3poTsh8z3fdq80t0l7D5EkSZIkSZIkSZIf5btbqvOsv9Z2ctj47bXJPhctBbyePdVgZn+zW2w+L7f6XBER4Hz66yIHVGyyVkBRBwfcoEbAyyorFK8NYItS2WdXoibAQCmr5dAEyFHc59x8LYB1Vm5SCyBLHTCiA1Cgvs8WHYCkIADhGgBnDAZsggFOBgOqwIBuBgPqwYALBgMOwIBTBgNSwYASBgOGwYAnMxgwxlhAmRkMsDIWkGgCA/IYCzAawIAUxgJmDWBAOWMBablgQC1jAft2MKCHsYAjFxhwzmBALBrAAhCAANAAExoQhgYsowHbaIBN203gUPw9YNEFyPl8z/hw75w/AaJ13YbzqudzcZd6ABGkLNDzGSSon1GOZ2j4dz4a1DGpsSnLE+TX4fkvj3H9eHxQEwkG7BAWsFaHBcxEExTg2iUsYIuwgHbCApKmsYDiSoICOlsJC3gkLKCQsIDjTCwgpoKggPsrggLM14QFbBAWkJqOBTT3EhSwZyQowPRAWEAXYQEOwgKGIrEATxpBAYaCEO9ThjegP9T71Oe1nxLyfXJ/3V/IDj0gc+5zPyqBAN2sfOzbnQRp4i7m/fnBLUmSJEnSf+gNDvtSmm1LN8MAAAAASUVORK5CYII="
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+IEmuOgAAAARnQU1BAACxjwv8YQUAAAABc1JHQgCuzhzpAAABfVBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/EeXvAAAAfnRSTlMAJvzr/f4lqKxYPPr5qqalp9wIA0OgxPgZ7BY/b/uy6BwBUQtxKMGiIZPzwMu4iBMV12QySpRA9tChWg4XcDaPOa4RzdmCLGPwBF0j34Ui5x3DgeJ9PZu+ArWDODAfeVcaudEzu5Vl9+FSmYfGLrxsDSk6i54QjubqmGdoqysSyl1fAAAB8UlEQVR42u3ZVW9CURCF0YEiLVaFuru7u7u7u7v7/PY+NE0LTVo4nLKTZr7nC3uFXBK4h0iSJEmSJEmSJMmPkrJmjiKtv9ZYtl7+7bUpPhddBbwes3diZn+zuyw+L7f6XBER4Hxm1TgHVHyKVkDLGQdcu0bA5TQrlKMNYElX2WdHribARQ+r5dQEcCvuc2qSFsAsKzekBeBRB9zpAMSp77NLByAvCEC4BkAdgwHzYICNwYAdMKCDwYBSMKCNwYBFMGCbwYA0MGCFwYBOMODUDAa8MBbwagYDrIwF5JrAgEjGAgxGMCCfsYBhIxhww1hAQSoYMMdYwKodDHhkLGDCAQbsMhgQjwawAAQgADTAhAaEoQGTaMAUGmDRdhM4FX8PuHQB3J/vmRPune0nQIKu23BU9XwueV8PIIKUBXo+gwz1M8qNKA3/zruDOiY1LHkSg/w6nP/lMa4fjw8essGAZ8ICihewgPsEggIcy4QF9BMWUEtYQN4gFnBQQVBAfTVhAU2EBVwTFrAZiwVEdxEUUNRHUID5kLCAXsIC0jKxgMpmggIGDAQFmGoIC1gjLMBJWMBWNhaQWEBQgDEuxPsU5Q1oDfU+FXrt54d8n7K+7pfEhB4Q2/C5n55BgMZGPvbtNoJ0exz9/vzgiSRJkiTpP/QGmV9SmiJali0AAAAASUVORK5CYII="
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+module.exports = PropTypes;
 
 /***/ })
 /******/ ]);
