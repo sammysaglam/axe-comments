@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Axe Comments example</title>
+		<script src="https://unpkg.com/react@15.6.1/dist/react.js"></script>
+		<script src="https://unpkg.com/react-dom@15.6.1/dist/react-dom.js"></script>
+		<script src="https://unpkg.com/prop-types@15.5.10/prop-types.js"></script>
+		<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+		<script src="https://unpkg.com/redux@3.7.2/dist/redux.js"></script>
+		<script src="https://unpkg.com/react-redux@5.0.5/dist/react-redux.js"></script>
+		<script src="https://unpkg.com/redux-thunk@2.2.0/dist/redux-thunk.js"></script>
+		<script src="axe-comments.js"></script>
+		<script src="axe-comments-redux.js?2345"></script>
+		<link rel="stylesheet" href="themes/theme-1.css"/>
+		<style>
+			#axe-comments {
+				margin : auto;
+				width  : 500px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="axe-comments">
+
+		</div>
+		<script type="text/babel">
+
+			const {fetchComments , toggleCommentLike , toggleCommentDislike , deleteComment , createNewComment} = AxeCommentsRedux.actionCreators({
+				'fetchComments'       :'/api/get-comments.json' ,
+				'toggleCommentLike'   :apiCall => '/api/dummy.php?' + apiCall + '-comment' ,
+				'toggleCommentDislike':apiCall => '/api/dummy.php?' + apiCall + '-comment' ,
+				'deleteComment'       :'/api/dummy.php?delete-comment' ,
+				'createNewComment'    :'/api/dummy.php?create-new-comment'
+			});
+
+			// adapters
+			const combineReducers = Redux.combineReducers;
+			const createStore = Redux.createStore;
+			const applyMiddleware = Redux.applyMiddleware;
+			const Provider = ReactRedux.Provider;
+
+			// redux init
+			const reducers = combineReducers({
+				axeComments:AxeCommentsRedux.reducer
+			});
+			const store = createStore(
+				reducers ,
+				applyMiddleware(ReduxThunk.default)
+			);
+
+			// react-redux connection
+			const mapStateToProps = (state , ownProps) => ({
+				...state.axeComments
+			});
+			const mapDispatchToProps = dispatch => ({
+				toggleLike      :(comment , notLoggedInError) => {
+					dispatch(toggleCommentLike(comment,notLoggedInError));
+				} ,
+				toggleDislike   :(comment , notLoggedInError) => {
+					dispatch(toggleCommentDislike(comment , notLoggedInError));
+				} ,
+				deleteComment   :comment => {
+					dispatch(deleteComment(comment));
+				} ,
+				createNewComment:(commentorName , text , callback) => {
+					dispatch(createNewComment(commentorName , text , callback));
+				}
+			});
+			const AxeCommentsContainer = ReactRedux.connect(
+				mapStateToProps ,
+				mapDispatchToProps
+			)(AxeComments);
+
+			// fetch comments on regular intervals
+			setInterval(() => {
+				//store.dispatch(fetchComments());
+			} , 5000);
+			store.dispatch(fetchComments());
+
+			// fake loggedInUser
+			const loggedInUser = {
+				id      :1 ,
+				username:'sammysaglam'
+			};
+
+			// render react component
+			var component = ReactDOM.render(
+					<Provider store={store}>
+						<AxeCommentsContainer
+								showNewCommentForm={true}
+								loggedInUser={loggedInUser}
+						/>
+					</Provider> ,
+				document.getElementById('axe-comments')
+			);
+
+		</script>
+	</body>
+</html>

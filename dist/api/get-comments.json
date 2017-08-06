@@ -6,8 +6,8 @@
 		"author_uid":"1" ,
 		"guest_author_name":null ,
 		"text":"Wow Incredible!" ,
-		"rating":"-1" ,
-		"current_user-vote":"0" ,
+		"rating":"-3" ,
+		"current_user-vote":"1" ,
 		"author":{
 			"id":"1" ,
 			"username":"sammysaglam"
@@ -20,8 +20,8 @@
 		"author_uid":null ,
 		"guest_author_name":"Sami" ,
 		"text":"Sed facilisis cursus nulla." ,
-		"rating":"-1" ,
-		"current_user-vote":"0" ,
+		"rating":"-15" ,
+		"current_user-vote":"-1" ,
 		"author":null
 	} ,
 	{
@@ -29,9 +29,9 @@
 		"customLabel":"ACSEL" ,
 		"date":"2017-07-11 13:13:37" ,
 		"author_uid":null ,
-		"guest_author_name":"sammy saglam" ,
+		"guest_author_name":"abc" ,
 		"text":"Why not" ,
-		"rating":"1" ,
+		"rating":"10" ,
 		"current_user-vote":"0" ,
 		"author":null
 	} ,
@@ -42,7 +42,7 @@
 		"author_uid":"1" ,
 		"guest_author_name":null ,
 		"text":"Pellentesque volutpat, ex sed porttitor condimentum, diam dui aliquam leo, imperdiet lacinia orci felis id massa." ,
-		"rating":"1" ,
+		"rating":"100" ,
 		"current_user-vote":"0" ,
 		"author":{
 			"id":"1" ,
@@ -56,8 +56,8 @@
 		"author_uid":null ,
 		"guest_author_name":"deneme" ,
 		"text":"Sed facilisis cursus nulla, eget mollis ipsum viverra sit amet." ,
-		"rating":"-1" ,
-		"current_user-vote":"0" ,
+		"rating":"-74" ,
+		"current_user-vote":"1" ,
 		"author":null
 	} ,
 	{
@@ -89,7 +89,7 @@
 		"author_uid":null ,
 		"guest_author_name":"jghj" ,
 		"text":"Morbi porta, ligula eget facilisis tempus, quam orci lobortis nisl, ac fringilla orci diam at sapien. Aliquam erat volutpat." ,
-		"rating":"0" ,
+		"rating":"-1" ,
 		"current_user-vote":"0" ,
 		"author":null
 	} ,
@@ -100,7 +100,7 @@
 		"author_uid":"1" ,
 		"guest_author_name":null ,
 		"text":"Aenean sodales lectus ac ipsum posuere tempor. Mauris eu fringilla tortor." ,
-		"rating":"0" ,
+		"rating":"20" ,
 		"current_user-vote":"0" ,
 		"author":{
 			"id":"1" ,
@@ -114,7 +114,7 @@
 		"author_uid":"1" ,
 		"guest_author_name":null ,
 		"text":"Praesent sed metus eu turpis congue bibendum. Duis quis tempor tellus." ,
-		"rating":"1" ,
+		"rating":"15" ,
 		"current_user-vote":"0" ,
 		"author":{
 			"id":"1" ,
@@ -128,7 +128,7 @@
 		"author_uid":"1" ,
 		"guest_author_name":null ,
 		"text":"Integer posuere diam nec malesuada tincidunt. Vivamus est neque, sodales id consectetur nec, volutpat sed mi." ,
-		"rating":"0" ,
+		"rating":"12" ,
 		"current_user-vote":"0" ,
 		"author":{
 			"id":"1" ,
