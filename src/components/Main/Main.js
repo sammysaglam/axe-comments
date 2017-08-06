@@ -31,7 +31,7 @@ export default class AxeComments extends React.Component {
 			<div className="axe-comments-root">
 				{this.props.showNewCommentForm ?
 					<NewCommentForm
-						saveNewComment={this.props.saveNewComment}
+						createNewComment={this.props.createNewComment}
 						loggedInUser={this.props.loggedInUser}
 						lang={this.lang}
 					/>
@@ -117,7 +117,7 @@ AxeComments.propTypes = {
 		}) ,
 		PropTypes.oneOf([false])
 	]) ,
-	saveNewComment     :PropTypes.func ,
+	createNewComment     :PropTypes.func ,
 	showNewCommentForm :PropTypes.bool ,
 	toggleDislike      :PropTypes.func.isRequired ,
 	toggleLike         :PropTypes.func.isRequired
