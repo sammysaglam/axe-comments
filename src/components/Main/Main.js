@@ -5,15 +5,19 @@ import PropTypes from 'prop-types';
 
 const LangDefaults = {
 	'no-comments-yet'                :'No comments yet...' ,
-	'just-now'                       :'just now...' ,
-	'mins-ago'                       :'minutes ago' ,
 	'comment-author-validation-error':'Your name must be min 3, max 20 characters' ,
 	'comment-text-validation-error'  :'Your comment cannot be empty, and cannot exceed 2000 characters' ,
 	'comment-author-placeholder'     :'Your Name' ,
 	'comment-placeholder'            :'write a comment...' ,
 	'add-comment'                    :'Add Comment' ,
 	'delete'                         :'Delete' ,
-	'error'                          :'Error'
+	'error'                          :'Error' ,
+	'just-now'                       :'just now...' ,
+	'years-ago'                      :'years ago' ,
+	'months-ago'                     :'months ago' ,
+	'days-ago'                       :'days ago' ,
+	'hours-ago'                      :'hours ago' ,
+	'mins-ago'                       :'minutes ago'
 };
 
 export default class AxeComments extends React.Component {
@@ -97,15 +101,19 @@ AxeComments.propTypes = {
 	deleteComment      :PropTypes.func.isRequired ,
 	lang               :PropTypes.shape({
 		'no-comments-yet'                :PropTypes.string ,
-		'just-now'                       :PropTypes.string ,
-		'mins-ago'                       :PropTypes.string ,
 		'comment-author-validation-error':PropTypes.string ,
 		'comment-text-validation-error'  :PropTypes.string ,
 		'comment-author-placeholder'     :PropTypes.string ,
 		'comment-placeholder'            :PropTypes.string ,
 		'add-comment'                    :PropTypes.string ,
 		'delete'                         :PropTypes.string ,
-		'error'                          :PropTypes.string
+		'error'                          :PropTypes.string ,
+		'just-now'                       :PropTypes.string ,
+		'years-ago'                      :PropTypes.string ,
+		'months-ago'                     :PropTypes.string ,
+		'days-ago'                       :PropTypes.string ,
+		'hours-ago'                      :PropTypes.string ,
+		'mins-ago'                       :PropTypes.string
 	}) ,
 	loggedInUser       :PropTypes.oneOfType([
 		PropTypes.shape({
