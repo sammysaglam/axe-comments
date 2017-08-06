@@ -1,2 +1,68 @@
-.axe-comments-root .add-comment input {
-  display: block; }
+.axe-comments-root {
+  all: initial;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Arial, sans-serif; }
+  .axe-comments-root * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; }
+  .axe-comments-root input[type="text"], .axe-comments-root input[type="password"], .axe-comments-root select, .axe-comments-root textarea {
+    padding: 10px 7px;
+    font-size: 15px;
+    font-family: Arial, sans-serif; }
+  .axe-comments-root button, .axe-comments-root input[type="submit"] {
+    cursor: pointer; }
+  .axe-comments-root .add-comment input {
+    width: 100%; }
+  .axe-comments-root .add-comment textarea {
+    width: 100%;
+    height: 100px;
+    resize: vertical; }
+  .axe-comments-root .add-comment button {
+    width: 100%;
+    height: 30px; }
+  .axe-comments-root .comment {
+    margin-top: 20px; }
+    .axe-comments-root .comment .username {
+      color: #FF4455;
+      font-size: 16px; }
+    .axe-comments-root .comment .date {
+      font-size: 12px; }
+    .axe-comments-root .comment .comment-contents {
+      padding: 5px 0;
+      color: #6E6E6E;
+      font-size: 13px; }
+    .axe-comments-root .comment .comment-actions {
+      display: flex;
+      align-items: center;
+      font-size: 13px; }
+      .axe-comments-root .comment .comment-actions span {
+        margin-right: 10px; }
+      .axe-comments-root .comment .comment-actions img {
+        width: 20px;
+        height: 20px; }
+      .axe-comments-root .comment .comment-actions span.like,
+      .axe-comments-root .comment .comment-actions span.dislike {
+        margin-right: 5px; }
+        .axe-comments-root .comment .comment-actions span.like img,
+        .axe-comments-root .comment .comment-actions span.dislike img {
+          cursor: pointer; }
+        .axe-comments-root .comment .comment-actions span.like:not(.liked):not(.disliked) img,
+        .axe-comments-root .comment .comment-actions span.dislike:not(.liked):not(.disliked) img {
+          opacity: 0.4; }
+          .axe-comments-root .comment .comment-actions span.like:not(.liked):not(.disliked) img:hover,
+          .axe-comments-root .comment .comment-actions span.dislike:not(.liked):not(.disliked) img:hover {
+            opacity: 0.2; }
+      .axe-comments-root .comment .comment-actions span.positive {
+        color: #00C532; }
+      .axe-comments-root .comment .comment-actions span.negative {
+        color: #FF0000; }
+      .axe-comments-root .comment .comment-actions span.delete {
+        color: #FF0000;
+        font-size: 12px;
+        margin: 0 15px 0 5px;
+        cursor: pointer; }
+        .axe-comments-root .comment .comment-actions span.delete:hover {
+          opacity: 0.4; }
