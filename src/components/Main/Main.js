@@ -58,7 +58,7 @@ export default class AxeComments extends React.Component {
 
 AxeComments.propTypes = {
 	allowReplyToComment:PropTypes.bool ,
-	comments           :React.PropTypes.arrayOf(PropTypes.shape({
+	comments           :PropTypes.arrayOf(PropTypes.shape({
 		'author_uid'       :PropTypes.oneOfType([
 			PropTypes.number ,
 			PropTypes.string
