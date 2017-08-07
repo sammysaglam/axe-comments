@@ -1,6 +1,6 @@
 {
 	"name": "axe-comments",
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"description": "Comments Module for Axe PHP Framework",
 	"main": "index.js",
 	"repository": "https://github.com/sammysaglam/axe-comments",
@@ -12,6 +12,7 @@
 		"build": "webpack -p"
 	},
 	"dependencies": {
+		"prop-types": "^15.5.10",
 		"react": "^15.6.1"
 	},
 	"devDependencies": {
