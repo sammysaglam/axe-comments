@@ -81,7 +81,8 @@
 			// fake loggedInUser
 			const loggedInUser = {
 				id      :1 ,
-				username:'sammysaglam'
+				username:'sammysaglam' ,
+				allowedToDeleteComment:comment => comment.id % 2 === 0 // allow user to delete comments which have an id of even number
 			};
 
 			// render react component

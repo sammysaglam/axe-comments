@@ -104,7 +104,8 @@ AxeComments.propTypes = {
 				PropTypes.number ,
 				PropTypes.string
 			]).isRequired ,
-			'username':PropTypes.string.isRequired
+			'username':PropTypes.string.isRequired ,
+			'allowedToDeleteComment':PropTypes.func
 		}) ,
 		PropTypes.oneOf([false])
 	]) ,

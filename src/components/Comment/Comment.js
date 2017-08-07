@@ -86,10 +86,18 @@ export default class Comment extends React.Component {
 						{comment.rating}
 					</span>
 
-					{this.props.loggedInUser && comment.author_uid && comment.author_uid.toString() === this.props.loggedInUser.id.toString() ?
-						<span className="delete" onClick={() => this.props.deleteComment(comment)}>{this.props.lang['delete']}</span>
-						:
-						null
+					{
+						this.props.loggedInUser
+						&&
+						(
+							(comment.author_uid && comment.author_uid.toString() === this.props.loggedInUser.id.toString())
+							||
+							(this.props.loggedInUser.allowedToDeleteComment && this.props.loggedInUser.allowedToDeleteComment(comment))
+						)
+							?
+							<span className="delete" onClick={() => this.props.deleteComment(comment)}>{this.props.lang['delete']}</span>
+							:
+							null
 					}
 
 					<span onClick={() => this.props.toggleLike(comment)} className={userVote === 1 ? 'like liked' : 'like'}>
