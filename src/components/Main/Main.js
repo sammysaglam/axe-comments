@@ -3,23 +3,6 @@ import NewCommentForm from '../NewCommentForm/NewCommentForm';
 import Comment from '../Comment/Comment';
 import PropTypes from 'prop-types';
 
-const LangDefaults = {
-	'no-comments-yet'                :'No comments yet...' ,
-	'comment-author-validation-error':'Your name must be min 3, max 20 characters' ,
-	'comment-text-validation-error'  :'Your comment cannot be empty, and cannot exceed 2000 characters' ,
-	'comment-author-placeholder'     :'Your Name' ,
-	'comment-placeholder'            :'write a comment...' ,
-	'add-comment'                    :'Add Comment' ,
-	'delete'                         :'Delete' ,
-	'error'                          :'Error' ,
-	'just-now'                       :'just now...' ,
-	'years-ago'                      :'years ago' ,
-	'months-ago'                     :'months ago' ,
-	'days-ago'                       :'days ago' ,
-	'hours-ago'                      :'hours ago' ,
-	'mins-ago'                       :'minutes ago'
-};
-
 export default class AxeComments extends React.Component {
 	constructor(props) {
 		super(props);
@@ -129,4 +112,21 @@ AxeComments.propTypes = {
 	showNewCommentForm :PropTypes.bool ,
 	toggleDislike      :PropTypes.func.isRequired ,
 	toggleLike         :PropTypes.func.isRequired
-}
+};
+
+const LangDefaults = {
+	'no-comments-yet'                :'No comments yet...' ,
+	'comment-author-validation-error':'Your name must be min 3, max 20 characters' ,
+	'comment-text-validation-error'  :'Your comment cannot be empty, and cannot exceed 2000 characters' ,
+	'comment-author-placeholder'     :'Your Name' ,
+	'comment-placeholder'            :'write a comment...' ,
+	'add-comment'                    :'Add Comment' ,
+	'delete'                         :'Delete' ,
+	'error'                          :'Error' ,
+	'just-now'                       :'just now...' ,
+	'years-ago'                      :'years ago' ,
+	'months-ago'                     :'months ago' ,
+	'days-ago'                       :'days ago' ,
+	'hours-ago'                      :'hours ago' ,
+	'mins-ago'                       :'minutes ago'
+};
