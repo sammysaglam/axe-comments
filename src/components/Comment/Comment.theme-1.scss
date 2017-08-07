@@ -1,0 +1,71 @@
+.comment {
+	margin-top : 20px;
+
+	.username {
+		color     : #FF4455;
+		font-size : 16px;
+	}
+
+	.date {
+		font-size : 12px;
+	}
+
+	.comment-contents {
+		padding   : 5px 0;
+		color     : #6E6E6E;
+		font-size : 13px;
+	}
+
+	.comment-actions {
+		display     : flex;
+		align-items : center;
+		font-size   : 13px;
+
+		span {
+			margin-right : 10px;
+		}
+
+		img {
+			width  : 20px;
+			height : 20px;
+		}
+
+		span.like,
+		span.dislike {
+			margin-right : 5px;
+
+			img {
+				cursor : pointer;
+			}
+
+			&:not(.liked):not(.disliked) {
+				img {
+					opacity : 0.4;
+
+					&:hover {
+						opacity : 0.2;
+					}
+				}
+			}
+		}
+
+		span.positive {
+			color : #00C532;
+		}
+
+		span.negative {
+			color : #FF0000;
+		}
+
+		span.delete {
+			color     : #FF0000;
+			font-size : 12px;
+			margin    : 0 15px 0 5px;
+			cursor    : pointer;
+
+			&:hover {
+				opacity : 0.4;
+			}
+		}
+	}
+}

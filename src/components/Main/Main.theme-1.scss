@@ -1,0 +1,26 @@
+.axe-comments-root {
+	all                     : initial;
+	-moz-osx-font-smoothing : grayscale;
+	-webkit-font-smoothing  : antialiased;
+	text-rendering          : optimizeLegibility;
+	font-family             : Arial, sans-serif;
+
+	* {
+		padding    : 0;
+		margin     : 0;
+		box-sizing : border-box;
+	}
+
+	input[type="text"], input[type="password"], select, textarea {
+		padding     : 10px 7px;
+		font-size   : 15px;
+		font-family : Arial, sans-serif;
+	}
+
+	button, input[type="submit"] {
+		cursor : pointer;
+	}
+
+	@import "../NewCommentForm/NewCommentForm.theme-1";
+	@import "../Comment/Comment.theme-1";
+}
