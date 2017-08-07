@@ -85,12 +85,16 @@
 				allowedToDeleteComment:comment => comment.id % 2 === 0 // allow user to delete comments which have an id of even number
 			};
 
+			// const customLabel function
+			const customLabel = comment => comment.customLabel + ' – ' ;
+
 			// render react component
 			var component = ReactDOM.render(
 					<Provider store={store}>
 						<AxeCommentsContainer
 								showNewCommentForm={true}
 								loggedInUser={loggedInUser}
+								customLabel={customLabel}
 						/>
 					</Provider> ,
 				document.getElementById('axe-comments')

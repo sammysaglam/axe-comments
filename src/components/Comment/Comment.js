@@ -63,7 +63,7 @@ export default class Comment extends React.Component {
 		return (
 			<div className={'comment' + (comment.stillLoading || comment.deleting ? ' is-loading' : '')}>
 				{this.props.customLabel ?
-					this.props.customLabel(comment)
+					<span className="custom-label">{this.props.customLabel(comment)}</span>
 					:
 					null
 				}
