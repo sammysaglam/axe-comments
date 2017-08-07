@@ -200,7 +200,7 @@ exports.default = AxeComments;
 
 AxeComments.propTypes = {
 	allowReplyToComment: _propTypes2.default.bool,
-	comments: _react2.default.PropTypes.arrayOf(_propTypes2.default.shape({
+	comments: _propTypes2.default.arrayOf(_propTypes2.default.shape({
 		'author_uid': _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string]),
 		'current_user-vote': _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string]),
 		'date': _propTypes2.default.string.isRequired,
