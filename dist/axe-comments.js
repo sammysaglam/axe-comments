@@ -138,23 +138,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var LangDefaults = {
-	'no-comments-yet': 'No comments yet...',
-	'comment-author-validation-error': 'Your name must be min 3, max 20 characters',
-	'comment-text-validation-error': 'Your comment cannot be empty, and cannot exceed 2000 characters',
-	'comment-author-placeholder': 'Your Name',
-	'comment-placeholder': 'write a comment...',
-	'add-comment': 'Add Comment',
-	'delete': 'Delete',
-	'error': 'Error',
-	'just-now': 'just now...',
-	'years-ago': 'years ago',
-	'months-ago': 'months ago',
-	'days-ago': 'days ago',
-	'hours-ago': 'hours ago',
-	'mins-ago': 'minutes ago'
-};
-
 var AxeComments = function (_React$Component) {
 	_inherits(AxeComments, _React$Component);
 
@@ -253,6 +236,23 @@ AxeComments.propTypes = {
 	showNewCommentForm: _propTypes2.default.bool,
 	toggleDislike: _propTypes2.default.func.isRequired,
 	toggleLike: _propTypes2.default.func.isRequired
+};
+
+var LangDefaults = {
+	'no-comments-yet': 'No comments yet...',
+	'comment-author-validation-error': 'Your name must be min 3, max 20 characters',
+	'comment-text-validation-error': 'Your comment cannot be empty, and cannot exceed 2000 characters',
+	'comment-author-placeholder': 'Your Name',
+	'comment-placeholder': 'write a comment...',
+	'add-comment': 'Add Comment',
+	'delete': 'Delete',
+	'error': 'Error',
+	'just-now': 'just now...',
+	'years-ago': 'years ago',
+	'months-ago': 'months ago',
+	'days-ago': 'days ago',
+	'hours-ago': 'hours ago',
+	'mins-ago': 'minutes ago'
 };
 
 /***/ }),
