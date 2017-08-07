@@ -90,7 +90,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var ACTIONS = exports.ACTIONS = {
 	UPDATE_CSRF_TOKEN: 'axe-comments/update-csrf-token',
 	FLAG_AS_FETCHING_COMMENTS: 'axe-comments/flag-as-fetching-comments',
-	UPDATE_COMMENTS: 'axe-comments/fetch-comments',
+	UPDATE_COMMENTS: 'axe-comments/update-comments',
 	TOGGLE_COMMENT_LIKE: 'axe-comments/toggle-like',
 	TOGGLE_COMMENT_DISLIKE: 'axe-comments/toggle-dislike',
 	DELETE_COMMENT: 'axe-comments/delete-comment',
