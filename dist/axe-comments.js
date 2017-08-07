@@ -230,7 +230,8 @@ AxeComments.propTypes = {
 	}),
 	loggedInUser: _propTypes2.default.oneOfType([_propTypes2.default.shape({
 		'id': _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string]).isRequired,
-		'username': _propTypes2.default.string.isRequired
+		'username': _propTypes2.default.string.isRequired,
+		'allowedToDeleteComment': _propTypes2.default.func
 	}), _propTypes2.default.oneOf([false])]),
 	createNewComment: _propTypes2.default.func,
 	showNewCommentForm: _propTypes2.default.bool,
@@ -506,7 +507,11 @@ var Comment = function (_React$Component) {
 			return _react2.default.createElement(
 				'div',
 				{ className: 'comment' + (comment.stillLoading || comment.deleting ? ' is-loading' : '') },
-				this.props.customLabel ? this.props.customLabel(comment) : null,
+				this.props.customLabel ? _react2.default.createElement(
+					'span',
+					{ className: 'custom-label' },
+					this.props.customLabel(comment)
+				) : null,
 				_react2.default.createElement(
 					'span',
 					{ className: 'username' },
@@ -541,7 +546,7 @@ var Comment = function (_React$Component) {
 						comment.rating < 0 ? '' : '+',
 						comment.rating
 					),
-					this.props.loggedInUser && comment.author_uid && comment.author_uid.toString() === this.props.loggedInUser.id.toString() ? _react2.default.createElement(
+					this.props.loggedInUser && (comment.author_uid && comment.author_uid.toString() === this.props.loggedInUser.id.toString() || this.props.loggedInUser.allowedToDeleteComment && this.props.loggedInUser.allowedToDeleteComment(comment)) ? _react2.default.createElement(
 						'span',
 						{ className: 'delete', onClick: function onClick() {
 								return _this2.props.deleteComment(comment);

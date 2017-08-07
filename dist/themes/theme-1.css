@@ -25,6 +25,9 @@
     height: 30px; }
   .axe-comments-root .comment {
     margin-top: 20px; }
+    .axe-comments-root .comment .custom-label {
+      font-weight: bold;
+      font-size: 15px; }
     .axe-comments-root .comment .username {
       color: #FF4455;
       font-size: 16px; }
