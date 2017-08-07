@@ -205,7 +205,7 @@ export const actionCreators = apiUrls => {
 	const toggleCommentLike = (comment , notLoggedInError) => (dispatch , getState) => {
 
 		// vars
-		const {csrfToken} = getState();
+		const {csrfToken} = getState().axeComments;
 
 		if ( comment['current_user-vote'] === 1 ) {
 
@@ -261,7 +261,7 @@ export const actionCreators = apiUrls => {
 	const toggleCommentDislike = (comment , notLoggedInError) => (dispatch , getState) => {
 
 		// vars
-		const {csrfToken} = getState();
+		const {csrfToken} = getState().axeComments;
 
 		if ( comment['current_user-vote'] === -1 ) {
 
@@ -317,7 +317,7 @@ export const actionCreators = apiUrls => {
 	const deleteComment = comment => (dispatch , getState) => {
 
 		// vars
-		const {csrfToken} = getState();
+		const {csrfToken} = getState().axeComments;
 		const fetchUrl = typeof apiUrls['deleteComment'] === 'function' ? apiUrls['deleteComment']() : apiUrls['deleteComment'];
 
 		// back-end
@@ -343,7 +343,7 @@ export const actionCreators = apiUrls => {
 	const createNewComment = (commentorName , text , callback) => (dispatch , getState) => {
 
 		// vars
-		const {csrfToken} = getState();
+		const {csrfToken} = getState().axeComments;
 		const fetchUrl = typeof apiUrls['createNewComment'] === 'function' ? apiUrls['createNewComment']() : apiUrls['createNewComment'];
 
 		// backend

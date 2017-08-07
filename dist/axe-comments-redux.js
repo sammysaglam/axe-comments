@@ -286,8 +286,8 @@ var actionCreators = exports.actionCreators = function actionCreators(apiUrls) {
 		return function (dispatch, getState) {
 
 			// vars
-			var _getState = getState(),
-			    csrfToken = _getState.csrfToken;
+			var csrfToken = getState().axeComments.csrfToken;
+
 
 			if (comment['current_user-vote'] === 1) {
 
@@ -347,8 +347,8 @@ var actionCreators = exports.actionCreators = function actionCreators(apiUrls) {
 		return function (dispatch, getState) {
 
 			// vars
-			var _getState2 = getState(),
-			    csrfToken = _getState2.csrfToken;
+			var csrfToken = getState().axeComments.csrfToken;
+
 
 			if (comment['current_user-vote'] === -1) {
 
@@ -408,8 +408,7 @@ var actionCreators = exports.actionCreators = function actionCreators(apiUrls) {
 		return function (dispatch, getState) {
 
 			// vars
-			var _getState3 = getState(),
-			    csrfToken = _getState3.csrfToken;
+			var csrfToken = getState().axeComments.csrfToken;
 
 			var fetchUrl = typeof apiUrls['deleteComment'] === 'function' ? apiUrls['deleteComment']() : apiUrls['deleteComment'];
 
@@ -438,8 +437,7 @@ var actionCreators = exports.actionCreators = function actionCreators(apiUrls) {
 		return function (dispatch, getState) {
 
 			// vars
-			var _getState4 = getState(),
-			    csrfToken = _getState4.csrfToken;
+			var csrfToken = getState().axeComments.csrfToken;
 
 			var fetchUrl = typeof apiUrls['createNewComment'] === 'function' ? apiUrls['createNewComment']() : apiUrls['createNewComment'];
 
