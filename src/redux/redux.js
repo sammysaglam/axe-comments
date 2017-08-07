@@ -1,11 +1,13 @@
 // actions
-const UPDATE_CSRF_TOKEN = 'axe-comments/update-csrf-token';
-const FLAG_AS_FETCHING_COMMENTS = 'axe-comments/flag-as-fetching-comments';
-const UPDATE_COMMENTS = 'axe-comments/fetch-comments';
-const TOGGLE_COMMENT_LIKE = 'axe-comments/toggle-like';
-const TOGGLE_COMMENT_DISLIKE = 'axe-comments/toggle-dislike';
-const DELETE_COMMENT = 'axe-comments/delete-comment';
-const SAVE_NEW_COMMENT = 'axe-comments/save-new-comment';
+export const ACTIONS = {
+	UPDATE_CSRF_TOKEN        :'axe-comments/update-csrf-token' ,
+	FLAG_AS_FETCHING_COMMENTS:'axe-comments/flag-as-fetching-comments' ,
+	UPDATE_COMMENTS          :'axe-comments/fetch-comments' ,
+	TOGGLE_COMMENT_LIKE      :'axe-comments/toggle-like' ,
+	TOGGLE_COMMENT_DISLIKE   :'axe-comments/toggle-dislike' ,
+	DELETE_COMMENT           :'axe-comments/delete-comment' ,
+	SAVE_NEW_COMMENT         :'axe-comments/save-new-comment'
+};
 
 // default state
 const defaultState = {
@@ -18,20 +20,20 @@ const defaultState = {
 // reducer
 export const reducer = (state = defaultState , action = {}) => {
 	switch (action.type) {
-		case UPDATE_CSRF_TOKEN:
+		case ACTIONS.UPDATE_CSRF_TOKEN:
 			return {
 				...state ,
 				csrfToken:action.csrfToken
 			};
 
-		case FLAG_AS_FETCHING_COMMENTS:
+		case ACTIONS.FLAG_AS_FETCHING_COMMENTS:
 			return {
 				...state ,
 				fetching  :true ,
 				abortFetch:false
 			};
 
-		case UPDATE_COMMENTS: {
+		case ACTIONS.UPDATE_COMMENTS: {
 			let newState = {};
 
 			if ( !state.abortFetch ) {
@@ -53,7 +55,7 @@ export const reducer = (state = defaultState , action = {}) => {
 			};
 		}
 
-		case TOGGLE_COMMENT_LIKE:
+		case ACTIONS.TOGGLE_COMMENT_LIKE:
 			return {
 				...state ,
 				abortFetch:true ,
@@ -102,7 +104,7 @@ export const reducer = (state = defaultState , action = {}) => {
 				})
 			};
 
-		case TOGGLE_COMMENT_DISLIKE:
+		case ACTIONS.TOGGLE_COMMENT_DISLIKE:
 			return {
 				...state ,
 				abortFetch:true ,
@@ -148,7 +150,7 @@ export const reducer = (state = defaultState , action = {}) => {
 				})
 			};
 
-		case DELETE_COMMENT: {
+		case ACTIONS.DELETE_COMMENT: {
 			return {
 				...state ,
 				abortFetch:true ,
@@ -156,8 +158,7 @@ export const reducer = (state = defaultState , action = {}) => {
 			};
 		}
 
-		case SAVE_NEW_COMMENT: {
-
+		case ACTIONS.SAVE_NEW_COMMENT: {
 			return {
 				...state ,
 				comments:[
@@ -183,7 +184,7 @@ export const actionCreators = apiUrls => {
 
 	const fetchComments = () => dispatch => {
 		dispatch({
-			type:FLAG_AS_FETCHING_COMMENTS
+			type:ACTIONS.FLAG_AS_FETCHING_COMMENTS
 		});
 
 		const fetchUrl = typeof apiUrls['fetchComments'] === 'function' ? apiUrls['fetchComments']() : apiUrls['fetchComments'];
@@ -196,7 +197,7 @@ export const actionCreators = apiUrls => {
 
 		}).then(response => response.json()).then(data => {
 			dispatch({
-				type    :UPDATE_COMMENTS ,
+				type    :ACTIONS.UPDATE_COMMENTS ,
 				comments:data
 			});
 		});
@@ -253,7 +254,7 @@ export const actionCreators = apiUrls => {
 
 		// dispatch action
 		dispatch({
-			type     :TOGGLE_COMMENT_LIKE ,
+			type     :ACTIONS.TOGGLE_COMMENT_LIKE ,
 			commentId:comment.id
 		});
 	};
@@ -309,7 +310,7 @@ export const actionCreators = apiUrls => {
 
 		// dispatch action
 		dispatch({
-			type     :TOGGLE_COMMENT_DISLIKE ,
+			type     :ACTIONS.TOGGLE_COMMENT_DISLIKE ,
 			commentId:comment.id
 		});
 	};
@@ -335,7 +336,7 @@ export const actionCreators = apiUrls => {
 
 		// dispatch action
 		dispatch({
-			type     :DELETE_COMMENT ,
+			type     :ACTIONS.DELETE_COMMENT ,
 			commentId:comment.id
 		});
 	};
@@ -367,7 +368,7 @@ export const actionCreators = apiUrls => {
 
 		// reducer
 		dispatch({
-			type       :SAVE_NEW_COMMENT ,
+			type       :ACTIONS.SAVE_NEW_COMMENT ,
 			commentData:{
 				id:0 - Math.floor((Math.random() * RAND_MAX) + 1) ,
 				commentorName ,

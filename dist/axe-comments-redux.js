@@ -87,13 +87,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 // actions
-var UPDATE_CSRF_TOKEN = 'axe-comments/update-csrf-token';
-var FLAG_AS_FETCHING_COMMENTS = 'axe-comments/flag-as-fetching-comments';
-var UPDATE_COMMENTS = 'axe-comments/fetch-comments';
-var TOGGLE_COMMENT_LIKE = 'axe-comments/toggle-like';
-var TOGGLE_COMMENT_DISLIKE = 'axe-comments/toggle-dislike';
-var DELETE_COMMENT = 'axe-comments/delete-comment';
-var SAVE_NEW_COMMENT = 'axe-comments/save-new-comment';
+var ACTIONS = exports.ACTIONS = {
+	UPDATE_CSRF_TOKEN: 'axe-comments/update-csrf-token',
+	FLAG_AS_FETCHING_COMMENTS: 'axe-comments/flag-as-fetching-comments',
+	UPDATE_COMMENTS: 'axe-comments/fetch-comments',
+	TOGGLE_COMMENT_LIKE: 'axe-comments/toggle-like',
+	TOGGLE_COMMENT_DISLIKE: 'axe-comments/toggle-dislike',
+	DELETE_COMMENT: 'axe-comments/delete-comment',
+	SAVE_NEW_COMMENT: 'axe-comments/save-new-comment'
+};
 
 // default state
 var defaultState = {
@@ -109,18 +111,18 @@ var reducer = exports.reducer = function reducer() {
 	var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 	switch (action.type) {
-		case UPDATE_CSRF_TOKEN:
+		case ACTIONS.UPDATE_CSRF_TOKEN:
 			return _extends({}, state, {
 				csrfToken: action.csrfToken
 			});
 
-		case FLAG_AS_FETCHING_COMMENTS:
+		case ACTIONS.FLAG_AS_FETCHING_COMMENTS:
 			return _extends({}, state, {
 				fetching: true,
 				abortFetch: false
 			});
 
-		case UPDATE_COMMENTS:
+		case ACTIONS.UPDATE_COMMENTS:
 			{
 				var newState = {};
 
@@ -139,7 +141,7 @@ var reducer = exports.reducer = function reducer() {
 				return _extends({}, state, newState);
 			}
 
-		case TOGGLE_COMMENT_LIKE:
+		case ACTIONS.TOGGLE_COMMENT_LIKE:
 			return _extends({}, state, {
 				abortFetch: true,
 				comments: state.comments.map(function (comment) {
@@ -183,7 +185,7 @@ var reducer = exports.reducer = function reducer() {
 				})
 			});
 
-		case TOGGLE_COMMENT_DISLIKE:
+		case ACTIONS.TOGGLE_COMMENT_DISLIKE:
 			return _extends({}, state, {
 				abortFetch: true,
 				comments: state.comments.map(function (comment) {
@@ -225,7 +227,7 @@ var reducer = exports.reducer = function reducer() {
 				})
 			});
 
-		case DELETE_COMMENT:
+		case ACTIONS.DELETE_COMMENT:
 			{
 				return _extends({}, state, {
 					abortFetch: true,
@@ -235,9 +237,8 @@ var reducer = exports.reducer = function reducer() {
 				});
 			}
 
-		case SAVE_NEW_COMMENT:
+		case ACTIONS.SAVE_NEW_COMMENT:
 			{
-
 				return _extends({}, state, {
 					comments: [{
 						'id': action.commentData.id,
@@ -260,7 +261,7 @@ var actionCreators = exports.actionCreators = function actionCreators(apiUrls) {
 	var fetchComments = function fetchComments() {
 		return function (dispatch) {
 			dispatch({
-				type: FLAG_AS_FETCHING_COMMENTS
+				type: ACTIONS.FLAG_AS_FETCHING_COMMENTS
 			});
 
 			var fetchUrl = typeof apiUrls['fetchComments'] === 'function' ? apiUrls['fetchComments']() : apiUrls['fetchComments'];
@@ -275,7 +276,7 @@ var actionCreators = exports.actionCreators = function actionCreators(apiUrls) {
 				return response.json();
 			}).then(function (data) {
 				dispatch({
-					type: UPDATE_COMMENTS,
+					type: ACTIONS.UPDATE_COMMENTS,
 					comments: data
 				});
 			});
@@ -337,7 +338,7 @@ var actionCreators = exports.actionCreators = function actionCreators(apiUrls) {
 
 			// dispatch action
 			dispatch({
-				type: TOGGLE_COMMENT_LIKE,
+				type: ACTIONS.TOGGLE_COMMENT_LIKE,
 				commentId: comment.id
 			});
 		};
@@ -398,7 +399,7 @@ var actionCreators = exports.actionCreators = function actionCreators(apiUrls) {
 
 			// dispatch action
 			dispatch({
-				type: TOGGLE_COMMENT_DISLIKE,
+				type: ACTIONS.TOGGLE_COMMENT_DISLIKE,
 				commentId: comment.id
 			});
 		};
@@ -427,7 +428,7 @@ var actionCreators = exports.actionCreators = function actionCreators(apiUrls) {
 
 			// dispatch action
 			dispatch({
-				type: DELETE_COMMENT,
+				type: ACTIONS.DELETE_COMMENT,
 				commentId: comment.id
 			});
 		};
@@ -464,7 +465,7 @@ var actionCreators = exports.actionCreators = function actionCreators(apiUrls) {
 
 			// reducer
 			dispatch({
-				type: SAVE_NEW_COMMENT,
+				type: ACTIONS.SAVE_NEW_COMMENT,
 				commentData: {
 					id: 0 - Math.floor(Math.random() * RAND_MAX + 1),
 					commentorName: commentorName,
