@@ -1,8 +1,14 @@
-version:2
+version: 2
 jobs:
     build:
         docker:
-            -image: circleci/node:7.10
+            - image: circleci/node:7.10
 
         steps:
-            -run: echo "hello world"
+            - checkout
+            - run:
+                name: install dependencies
+                command: yarn install
+            - run:
+                name: run eslint
+                command: node_modules/.bin/eslint src
