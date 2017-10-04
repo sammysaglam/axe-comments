@@ -1,6 +1,6 @@
 {
 	"name": "axe-comments",
-	"version": "1.2.8",
+	"version": "1.2.10",
 	"description": "Comments Module for Axe PHP Framework",
 	"main": "index.js",
 	"repository": "https://github.com/sammysaglam/axe-comments",
