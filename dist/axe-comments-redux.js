@@ -91,7 +91,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var ReduxBundleCreator = function () {
 
 	// actions
-	var ACTIONS = {
+	var REDUX_ACTIONS = {
 		UPDATE_CSRF_TOKEN: 'axe-comments/UPDATE_CSRF_TOKEN',
 		FLAG_AS_FETCHING_COMMENTS: 'axe-comments/FLAG_AS_FETCHING_COMMENTS',
 		UPDATE_COMMENTS: 'axe-comments/UPDATE_COMMENTS',
@@ -494,7 +494,7 @@ var ReduxBundleCreator = function () {
 		};
 	};
 
-	return (0, _reduxDucklings2.default)(ACTIONS, createReducer, actionCreators);
+	return (0, _reduxDucklings2.default)(REDUX_ACTIONS, createReducer, actionCreators);
 }();
 
 module.exports = ReduxBundleCreator;

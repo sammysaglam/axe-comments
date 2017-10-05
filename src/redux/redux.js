@@ -1,9 +1,9 @@
 import createReduxDuckling from 'redux-ducklings';
 
-const ReduxBundleCreator = (function() {
+const ReduxBundleCreator = (() => {
 
 	// actions
-	const ACTIONS = {
+	const REDUX_ACTIONS = {
 		UPDATE_CSRF_TOKEN:'axe-comments/UPDATE_CSRF_TOKEN' ,
 		FLAG_AS_FETCHING_COMMENTS:'axe-comments/FLAG_AS_FETCHING_COMMENTS' ,
 		UPDATE_COMMENTS:'axe-comments/UPDATE_COMMENTS' ,
@@ -391,10 +391,10 @@ const ReduxBundleCreator = (function() {
 	}
 
 	return createReduxDuckling(
-		ACTIONS ,
+		REDUX_ACTIONS ,
 		createReducer ,
 		actionCreators
 	);
-}());
+})();
 
 module.exports = ReduxBundleCreator;
