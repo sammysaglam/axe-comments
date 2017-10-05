@@ -25,30 +25,30 @@ const outputFilename = !isProduction ? '[name].js' : '[name].min.js';
 
 const baseConfig = {
 	externals:{
-		'react'     :'React' ,
+		'react':'React' ,
 		'prop-types':'PropTypes'
 	} ,
-	module   :{
+	module:{
 		rules:[
 			{test:/\.(jpg|png|svg)$/ , loader:'url-loader'} ,
-			{test:/\.(js|jsx)$/ , loader:'babel-loader' , exclude:/node_modules/} ,
-			...(themes.map((themeName , index) => ({test:new RegExp(themeName + "\.scss$") , loader:themeExtractors[index].extract(['css-loader' , 'sass-loader'])}))) ,
+			{test:/\.(js|jsx)$/ , loader:'babel-loader'} ,
+			...(themes.map((themeName , index) => ({test:new RegExp(themeName + "\.scss$") , loader:themeExtractors[index].extract(['css-loader' , 'sass-loader'])})))
 		]
 	} ,
-	plugins  :plugins
+	plugins:plugins
 }
 
 const generateOutputConfig = libraryName => ({
-	path         :path.resolve('./dist') ,
-	filename     :outputFilename ,
+	path:path.resolve('./dist') ,
+	filename:outputFilename ,
 	libraryTarget:'var' ,
-	library      :libraryName
+	library:libraryName
 });
 
 const AxeCommentsConfig = Object.assign({} ,
 	baseConfig ,
 	{
-		entry :{
+		entry:{
 			'axe-comments':[
 				...(themes.map(themeName => './src/themes/' + themeName + '.scss')) ,
 				'./index.js'
@@ -61,7 +61,7 @@ const AxeCommentsConfig = Object.assign({} ,
 const ReduxConfig = Object.assign({} ,
 	baseConfig ,
 	{
-		entry :{
+		entry:{
 			'axe-comments-redux':['./src/redux/redux.js']
 		} ,
 		output:generateOutputConfig('AxeCommentsRedux')
