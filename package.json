@@ -9,7 +9,7 @@
 	"scripts": {
 		"build-watch": "webpack --progress --watch",
 		"build-dev": "webpack --progress",
-		"build": "webpack -p"
+		"build": "lint && webpack --progress && webpack -p"
 	},
 	"dependencies": {
 		"prop-types": "^15.6.0",
